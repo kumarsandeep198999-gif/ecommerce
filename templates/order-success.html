@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Order Placed</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            color: #111;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 60px auto;
+            background: white;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        h1 {
+            margin-bottom: 15px;
+        }
+
+        .order-box {
+            text-align: left;
+            margin-top: 30px;
+            padding: 25px;
+            background: #f7f7f7;
+        }
+
+        .row {
+            margin-bottom: 12px;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 25px;
+            background: #111;
+            color: white;
+            text-decoration: none;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>
+        ✅ Order Placed Successfully
+    </h1>
+
+    <p>
+        Thank you for your order.
+    </p>
+
+
+    <div class="order-box">
+
+        <div class="row">
+            <span class="label">Customer:</span>
+            {{ order.name }}
+        </div>
+
+        <div class="row">
+            <span class="label">Mobile:</span>
+            {{ order.mobile }}
+        </div>
+
+        <div class="row">
+            <span class="label">Address:</span>
+            {{ order.address }}
+        </div>
+
+        <div class="row">
+            <span class="label">City:</span>
+            {{ order.city }}
+        </div>
+
+        <div class="row">
+            <span class="label">State:</span>
+            {{ order.state }}
+        </div>
+
+        <div class="row">
+            <span class="label">PIN Code:</span>
+            {{ order.pincode }}
+        </div>
+
+        <div class="row">
+            <span class="label">Total:</span>
+            ₹{{ "{:,}".format(order.total) }}
+        </div>
+
+    </div>
+
+
+    <a
+        class="button"
+        href="/"
+    >
+        Continue Shopping
+    </a>
+
+</div>
+
+</body>
+
+</html>

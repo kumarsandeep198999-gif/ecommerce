@@ -1,0 +1,433 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My E-Commerce Store</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            color: #222;
+        }
+
+        /* TOP NAVIGATION */
+        .topbar {
+            background: #111;
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* SEARCH */
+        .search-box {
+            background: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            width: 180px;
+            font-size: 14px;
+        }
+
+        .search-box button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        /* CATEGORIES */
+        .categories {
+            background: white;
+            padding: 16px 5%;
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            border-bottom: 1px solid #ddd;
+            flex-wrap: wrap;
+        }
+
+        .categories a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .categories a:hover {
+            color: #e65c00;
+        }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 55px 20px;
+            background: #eeeeee;
+        }
+
+        .hero h1 {
+            margin: 0 0 12px;
+            font-size: 38px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #555;
+        }
+
+        /* PRODUCTS */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .product {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px #ddd;
+            transition: 0.2s;
+        }
+
+        .product:hover {
+            transform: translateY(-4px);
+        }
+
+        .product-image {
+            height: 180px;
+            background: #eeeeee;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 65px;
+            margin-bottom: 15px;
+        }
+
+        .product h3 {
+            margin: 10px 0;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 12px 0;
+        }
+
+        .add-cart {
+            background: #111;
+            color: white;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .add-cart:hover {
+            background: #e65c00;
+        }
+
+        /* CART */
+        .cart {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            background: #e65c00;
+            color: white;
+            padding: 14px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px #aaa;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        /* MOBILE */
+        @media (max-width: 800px) {
+            .products {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .topbar {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .search-box input {
+                width: 130px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOP NAVIGATION -->
+    <header class="topbar">
+
+        <div class="logo">
+            🛒 My Store
+        </div>
+
+        <nav class="nav-links">
+            <a href="/">Home</a>
+            <a href="#">New Arrivals</a>
+            <a href="#">Sale</a>
+            <a href="/admin-login">Login</a>
+            <a href="/orders">Orders</a>    
+        </nav>
+
+        <!-- SEARCH -->
+        <div class="search-box">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search products..."
+                onkeyup="searchProducts()"
+            >
+            <button>🔍</button>
+        </div>
+
+    </header>
+
+
+    <!-- CATEGORIES -->
+    <div class="categories">
+
+        <a href="/designers">Designers</a>
+<a href="/ready-to-wear">Ready-to-Wear</a>
+<a href="/shoes">Shoes</a>
+<a href="/bags">Bags</a>
+<a href="/accessories">Accessories</a>
+<a href="/jewelry">Jewelry</a>
+<a href="/beauty">Beauty</a>
+
+    </div>
+
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <h1>Welcome to My Store</h1>
+
+        <p>
+            Discover quality products at great prices.
+        </p>
+
+    </section>
+
+
+    <!-- PRODUCTS -->
+    <main class="container">
+
+        <h2 class="section-title">
+            Featured Products
+        </h2>
+
+        <div class="products" id="productList">
+
+            <!-- PRODUCT 1 -->
+            <div class="product">
+
+                <div class="product-image">
+                    💻
+                </div>
+
+                <h3>Laptop</h3>
+
+                <p class="price">
+                    ₹45,000
+                </p>
+
+                <button
+                    class="add-cart"
+                    onclick="addToCart('Laptop', 45000)"
+                >
+                    Add to Cart
+                </button>
+
+            </div>
+
+
+            <!-- PRODUCT 2 -->
+            <div class="product">
+
+                <div class="product-image">
+                    📱
+                </div>
+
+                <h3>Mobile Phone</h3>
+
+                <p class="price">
+                    ₹15,000
+                </p>
+
+                <button
+                    class="add-cart"
+                    onclick="addToCart('Mobile Phone', 15000)"
+                >
+                    Add to Cart
+                </button>
+
+            </div>
+
+
+            <!-- PRODUCT 3 -->
+            <div class="product">
+
+                <div class="product-image">
+                    🎧
+                </div>
+
+                <h3>Headphones</h3>
+
+                <p class="price">
+                    ₹1,500
+                </p>
+
+                <button
+                    class="add-cart"
+                    onclick="addToCart('Headphones', 1500)"
+                >
+                    Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- CART -->
+    <div class="cart">
+        🛒 Cart: <span id="cartCount">0</span>
+    </div>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <p>© 2026 My E-Commerce Store</p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+        let cartCount = 0;
+
+        function addToCart(productName, price) {
+
+            cartCount++;
+
+            document.getElementById("cartCount").innerText = cartCount;
+
+            alert(productName + " added to cart!");
+
+        }
+
+
+        function searchProducts() {
+
+            let search =
+                document
+                .getElementById("searchInput")
+                .value
+                .toLowerCase();
+
+            let products =
+                document.querySelectorAll(".product");
+
+            products.forEach(function(product) {
+
+                let name =
+                    product
+                    .querySelector("h3")
+                    .innerText
+                    .toLowerCase();
+
+                if (name.includes(search)) {
+                    product.style.display = "block";
+                } else {
+                    product.style.display = "none";
+                }
+
+            });
+
+        }
+
+    </script>
+
+</body>
+</html>
+

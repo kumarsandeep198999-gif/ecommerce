@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ready-to-Wear</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            color: #111;
+        }
+
+        header {
+            background: #111;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 35px;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .category {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 30px 15px;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .category:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 5px 15px #ddd;
+        }
+
+        .category h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .category a {
+            display: inline-block;
+            background: #111;
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+        }
+
+        footer {
+            margin-top: 50px;
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        @media (max-width: 800px) {
+            .categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .categories {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">MY STORE</div>
+    <a href="/">← Home</a>
+</header>
+
+<div class="container">
+
+    <h1>Ready-to-Wear</h1>
+
+    <p class="subtitle">
+        Explore our Ready-to-Wear collection
+    </p>
+
+    <div class="categories">
+
+        <div class="category">
+            <h2>All Products</h2>
+            <a href="/ready-to-wear/all-products">View Products</a>
+        </div>
+
+        <div class="category">
+            <h2>New Brands</h2>
+            <a href="/ready-to-wear/new-brands">View Products</a>
+        </div>
+
+        <div class="category">
+            <h2>Jackets</h2>
+            <a href="/ready-to-wear/jackets">View Products</a>
+        </div>
+
+        <div class="category">
+            <h2>Knitwear</h2>
+            <a href="/ready-to-wear/knitwear">View Products</a>
+        </div>
+
+        <div class="category">
+            <h2>Leather</h2>
+            <a href="/ready-to-wear/leather">View Products</a>
+        </div>
+
+        <div class="category">
+            <h2>Tops & Shirts</h2>
+            <a href="/ready-to-wear/tops-shirts">View Products</a>
+        </div>
+
+        <div class="category">
+            <h2>Sets</h2>
+            <a href="/ready-to-wear/sets">View Products</a>
+        </div>
+
+        <div class="category">
+            <h2>Skirts</h2>
+            <a href="/ready-to-wear/skirts">View Products</a>
+        </div>
+
+        <div class="category">
+            <h2>Coats</h2>
+            <a href="/ready-to-wear/coats">View Products</a>
+        </div>
+
+        <div class="category">
+            <h2>Dresses</h2>
+            <a href="/ready-to-wear/dresses">View Products</a>
+        </div>
+
+        <div class="category">
+            <h2>Denim</h2>
+            <a href="/ready-to-wear/denim">View Products</a>
+        </div>
+
+        <div class="category">
+            <h2>Pants</h2>
+            <a href="/ready-to-wear/pants">View Products</a>
+        </div>
+
+        <div class="category">
+            <h2>Suits</h2>
+            <a href="/ready-to-wear/suits">View Products</a>
+        </div>
+
+        <div class="category">
+            <h2>Sweatshirts</h2>
+            <a href="/ready-to-wear/sweatshirts">View Products</a>
+        </div>
+
+        <div class="category">
+            <h2>Shorts</h2>
+            <a href="/ready-to-wear/shorts">View Products</a>
+        </div>
+
+        <div class="category">
+            <h2>Beachwear</h2>
+            <a href="/ready-to-wear/beachwear">View Products</a>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 My E-Commerce Store
+</footer>
+
+</body>
+</html>

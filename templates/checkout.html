@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            color: #111;
+        }
+
+        header {
+            background: #111;
+            color: white;
+            padding: 20px 40px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .box {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid #ddd;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .product {
+            padding: 12px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .place-order {
+            width: 100%;
+            padding: 15px;
+            background: #111;
+            color: white;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .place-order:hover {
+            background: #333;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        MY STORE
+    </div>
+
+</header>
+
+
+<div class="container">
+
+    <h1>
+        Checkout
+    </h1>
+
+
+    <!-- CUSTOMER DETAILS -->
+
+    <div class="box">
+
+        <h2>Delivery Address</h2>
+
+        <form action="/place-order" method="POST">
+
+            <label>
+                Customer Name
+            </label>
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Enter your full name"
+                required
+            >
+
+
+            <label>
+                Mobile Number
+            </label>
+
+            <input
+                type="tel"
+                name="mobile"
+                placeholder="Enter mobile number"
+                required
+            >
+
+
+            <label>
+                Full Address
+            </label>
+
+            <textarea
+                name="address"
+                placeholder="House No., Street, Area"
+                required
+            ></textarea>
+
+
+            <label>
+                City
+            </label>
+
+            <input
+                type="text"
+                name="city"
+                placeholder="Enter city"
+                required
+            >
+
+
+            <label>
+                State
+            </label>
+
+            <input
+                type="text"
+                name="state"
+                placeholder="Enter state"
+                required
+            >
+
+
+            <label>
+                PIN Code
+            </label>
+
+            <input
+                type="text"
+                name="pincode"
+                placeholder="Enter PIN code"
+                required
+            >
+
+
+            <!-- ORDER SUMMARY -->
+
+            <h2 style="margin-top:30px;">
+                Your Order
+            </h2>
+
+            {% for item in cart_items %}
+
+            <div class="product">
+
+                <strong>
+                    {{ item.name }}
+                </strong>
+
+                <br>
+
+                {{ item.brand }}
+
+                <br>
+
+                ₹{{ "{:,}".format(item.price) }}
+
+            </div>
+
+            {% endfor %}
+
+
+            <div class="total">
+
+                Total:
+                ₹{{ "{:,}".format(total) }}
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="place-order"
+            >
+                Place Order
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

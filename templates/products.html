@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ category }} - My E-Commerce Store</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            color: #222;
+        }
+
+        header {
+            background: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .header-links a {
+            text-decoration: none;
+            color: #222;
+            margin-left: 25px;
+        }
+
+        .categories {
+            background: white;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .categories a {
+            text-decoration: none;
+            color: #333;
+            margin: 0 12px;
+            font-size: 14px;
+        }
+
+        .categories a:hover {
+            text-decoration: underline;
+        }
+
+        .page-title {
+            text-align: center;
+            padding: 35px 10px 20px;
+        }
+
+        .page-title h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .page-title p {
+            color: #666;
+        }
+
+        .product-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid #ddd;
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 280px;
+            background: #eeeeee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 18px;
+        }
+
+        .brand {
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 7px;
+        }
+
+        .product-name {
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .add-cart {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: black;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .add-cart:hover {
+            background: #333;
+        }
+
+        footer {
+            margin-top: 50px;
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        @media (max-width: 900px) {
+
+            .product-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 550px) {
+
+            header {
+                padding: 15px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .categories a {
+                display: inline-block;
+                margin: 5px;
+            }
+
+            .product-container {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header>
+
+        <div class="logo">
+            My E-Commerce Store
+        </div>
+
+        <div class="header-links">
+
+            <a href="/">Home</a>
+
+            <a href="/ready-to-wear">
+                Ready-to-Wear
+            </a>
+
+            <a href="#">
+                Login
+            </a>
+
+            <a href="/cart">
+                Cart 🛒
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- Categories -->
+
+    <div class="categories">
+
+        <a href="/ready-to-wear/all-products">All Products</a>
+        <a href="/ready-to-wear/new-brands">New Brands</a>
+        <a href="/ready-to-wear/jackets">Jackets</a>
+        <a href="/ready-to-wear/knitwear">Knitwear</a>
+        <a href="/ready-to-wear/leather">Leather</a>
+        <a href="/ready-to-wear/tops-shirts">Tops & Shirts</a>
+        <a href="/ready-to-wear/sets">Sets</a>
+        <a href="/ready-to-wear/skirts">Skirts</a>
+        <a href="/ready-to-wear/coats">Coats</a>
+        <a href="/ready-to-wear/dresses">Dresses</a>
+        <a href="/ready-to-wear/denim">Denim</a>
+        <a href="/ready-to-wear/pants">Pants</a>
+        <a href="/ready-to-wear/suits">Suits</a>
+        <a href="/ready-to-wear/sweatshirts">Sweatshirts</a>
+        <a href="/ready-to-wear/shorts">Shorts</a>
+        <a href="/ready-to-wear/beachwear">Beachwear</a>
+
+    </div>
+
+
+    <!-- Page Title -->
+
+    <div class="page-title">
+
+        <h1>
+            {{ category }}
+        </h1>
+
+        <p>
+            Discover our latest {{ category }} collection
+        </p>
+
+    </div>
+
+
+    <!-- Products -->
+
+    <div class="product-container">
+
+        {% for product in products %}
+
+        <div class="product-card">
+
+            <div class="product-image">
+
+                {% if product.image is defined %}
+
+                    <img
+                        src="{{ url_for('static', filename='images/' + product.image) }}"
+                        alt="{{ product.name }}"
+                    >
+
+                {% else %}
+
+                    {{ product.name }}
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="product-info">
+
+                <div class="brand">
+                    {{ product.brand }}
+                </div>
+
+                <div class="product-name">
+                    {{ product.name }}
+                </div>
+
+                <div class="price">
+                    ₹{{ "{:,}".format(product.price) }}
+                </div>
+
+
+                <!-- ADD TO CART -->
+
+                <form
+                    action="/add-to-cart"
+                    method="POST"
+                >
+
+                    <input
+                        type="hidden"
+                        name="brand"
+                        value="{{ product.brand }}"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="name"
+                        value="{{ product.name }}"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="price"
+                        value="{{ product.price }}"
+                    >
+
+                    <button
+                        type="submit"
+                        class="add-cart"
+                    >
+                        Add to Cart
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        © 2026 My E-Commerce Store
+
+    </footer>
+
+</body>
+</html>

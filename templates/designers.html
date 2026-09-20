@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Designers - My E-Commerce Store</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            color: #111;
+        }
+
+        /* Header */
+        header {
+            background: #111;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Main */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 35px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        /* Menu */
+        .menu {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .menu button {
+            padding: 12px 20px;
+            border: 1px solid #222;
+            background: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .menu button:hover {
+            background: #111;
+            color: white;
+        }
+
+        /* Search */
+        .search {
+            display: block;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 35px;
+            padding: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Alphabet */
+        .alphabet {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .alphabet button {
+            margin: 4px;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .alphabet button:hover {
+            background: #111;
+            color: white;
+        }
+
+        /* Brand Grid */
+        .brands {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .brand {
+            background: white;
+            padding: 30px 20px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+
+        .brand:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px #ddd;
+        }
+
+        .brand h2 {
+            margin: 0 0 10px;
+        }
+
+        .brand a {
+            text-decoration: none;
+            color: #111;
+        }
+
+        .brand p {
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        .view {
+            display: inline-block;
+            background: #111;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 50px;
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        /* Mobile */
+        @media (max-width: 700px) {
+            .brands {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Header -->
+<header>
+    <div class="logo">MY STORE</div>
+    <a href="/">← Home</a>
+</header>
+
+
+<div class="container">
+
+    <h1>Designers</h1>
+
+    <p class="subtitle">
+        Discover our designer brands
+    </p>
+
+
+    <!-- Main Menu -->
+    <div class="menu">
+
+        <button onclick="showAll()">
+            All Brands
+        </button>
+
+        <button onclick="showNew()">
+            New Brands
+        </button>
+
+    </div>
+
+
+    <!-- Search -->
+    <input
+        type="text"
+        id="search"
+        class="search"
+        placeholder="Search designer brand..."
+        onkeyup="searchBrands()"
+    >
+
+
+    <!-- Alphabet -->
+    <div class="alphabet">
+
+        <button onclick="filterLetter('A')">A</button>
+        <button onclick="filterLetter('B')">B</button>
+        <button onclick="filterLetter('C')">C</button>
+        <button onclick="filterLetter('D')">D</button>
+        <button onclick="filterLetter('I')">I</button>
+        <button onclick="filterLetter('K')">K</button>
+        <button onclick="filterLetter('L')">L</button>
+        <button onclick="filterLetter('M')">M</button>
+        <button onclick="filterLetter('T')">T</button>
+        <button onclick="showAll()">ALL</button>
+
+    </div>
+
+
+    <!-- Brands -->
+    <div class="brands" id="brandList">
+
+
+        <!-- Ami Paris -->
+        <div class="brand" data-name="Ami Paris">
+            <h2>Ami Paris</h2>
+            <p>Designer Collection</p>
+            <a class="view" href="/brand/ami-paris">
+                View Brand
+            </a>
+        </div>
+
+
+        <!-- Balmain -->
+        <div class="brand" data-name="Balmain">
+            <h2>Balmain</h2>
+            <p>Designer Collection</p>
+            <a class="view" href="/brand/balmain">
+                View Brand
+            </a>
+        </div>
+
+
+        <!-- Burberry -->
+        <div class="brand" data-name="Burberry">
+            <h2>Burberry</h2>
+            <p>Designer Collection</p>
+            <a class="view" href="/brand/burberry">
+                View Brand
+            </a>
+        </div>
+
+
+        <!-- Celine -->
+        <div class="brand" data-name="Celine">
+            <h2>Celine</h2>
+            <p>Designer Collection</p>
+            <a class="view" href="/brand/celine">
+                View Brand
+            </a>
+        </div>
+
+
+        <!-- Chloé -->
+        <div class="brand" data-name="Chloé">
+            <h2>Chloé</h2>
+            <p>Designer Collection</p>
+            <a class="view" href="/brand/chloe">
+                View Brand
+            </a>
+        </div>
+
+
+        <!-- Dior -->
+        <div class="brand" data-name="Dior">
+            <h2>Dior</h2>
+            <p>Designer Collection</p>
+            <a class="view" href="/brand/dior">
+                View Brand
+            </a>
+        </div>
+
+
+        <!-- Isabel Marant -->
+        <div class="brand" data-name="Isabel Marant">
+            <h2>Isabel Marant</h2>
+            <p>Designer Collection</p>
+            <a class="view" href="/brand/isabel-marant">
+                View Brand
+            </a>
+        </div>
+
+
+        <!-- Khaite -->
+        <div class="brand" data-name="Khaite">
+            <h2>Khaite</h2>
+            <p>Designer Collection</p>
+            <a class="view" href="/brand/khaite">
+                View Brand
+            </a>
+        </div>
+
+
+        <!-- Lemaire -->
+        <div class="brand" data-name="Lemaire">
+            <h2>Lemaire</h2>
+            <p>Designer Collection</p>
+            <a class="view" href="/brand/lemaire">
+                View Brand
+            </a>
+        </div>
+
+
+        <!-- Loewe -->
+        <div class="brand" data-name="Loewe">
+            <h2>Loewe</h2>
+            <p>Designer Collection</p>
+            <a class="view" href="/brand/loewe">
+                View Brand
+            </a>
+        </div>
+
+
+        <!-- Louis Vuitton -->
+        <div class="brand" data-name="Louis Vuitton">
+            <h2>Louis Vuitton</h2>
+            <p>Designer Collection</p>
+            <a class="view" href="/brand/louis-vuitton">
+                View Brand
+            </a>
+        </div>
+
+
+        <!-- Miu Miu -->
+        <div class="brand" data-name="Miu Miu">
+            <h2>Miu Miu</h2>
+            <p>Designer Collection</p>
+            <a class="view" href="/brand/miu-miu">
+                View Brand
+            </a>
+        </div>
+
+
+        <!-- The Row -->
+        <div class="brand" data-name="The Row">
+            <h2>The Row</h2>
+            <p>Designer Collection</p>
+            <a class="view" href="/brand/the-row">
+                View Brand
+            </a>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- Footer -->
+<footer>
+    © 2026 My E-Commerce Store
+</footer>
+
+
+<script>
+
+    function showAll() {
+
+        let brands = document.querySelectorAll(".brand");
+
+        brands.forEach(function(brand) {
+            brand.style.display = "block";
+        });
+
+        document.getElementById("search").value = "";
+    }
+
+
+    function searchBrands() {
+
+        let search =
+            document.getElementById("search").value.toLowerCase();
+
+        let brands =
+            document.querySelectorAll(".brand");
+
+        brands.forEach(function(brand) {
+
+            let name =
+                brand.getAttribute("data-name").toLowerCase();
+
+            if (name.includes(search)) {
+                brand.style.display = "block";
+            } else {
+                brand.style.display = "none";
+            }
+
+        });
+
+    }
+
+
+    function filterLetter(letter) {
+
+        let brands =
+            document.querySelectorAll(".brand");
+
+        brands.forEach(function(brand) {
+
+            let name =
+                brand.getAttribute("data-name");
+
+            if (name.toUpperCase().startsWith(letter)) {
+                brand.style.display = "block";
+            } else {
+                brand.style.display = "none";
+            }
+
+        });
+
+    }
+
+
+    function showNew() {
+
+        let brands =
+            document.querySelectorAll(".brand");
+
+        brands.forEach(function(brand) {
+
+            let name =
+                brand.getAttribute("data-name");
+
+            if (
+                name === "Ami Paris" ||
+                name === "Khaite" ||
+                name === "The Row"
+            ) {
+                brand.style.display = "block";
+            } else {
+                brand.style.display = "none";
+            }
+
+        });
+
+    }
+
+</script>
+
+</body>
+</html>

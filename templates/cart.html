@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Shopping Cart</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            color: #111;
+        }
+
+        header {
+            background: #111;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .cart-item {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .brand {
+            color: #777;
+            margin-top: 5px;
+        }
+
+        .price {
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .remove {
+            background: #111;
+            color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .total {
+            background: white;
+            padding: 25px;
+            margin-top: 25px;
+            text-align: right;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .button {
+            background: #111;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .empty {
+            text-align: center;
+            background: white;
+            padding: 50px;
+            font-size: 20px;
+        }
+
+        footer {
+            margin-top: 50px;
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        MY STORE
+    </div>
+
+    <a href="/">
+        ← Home
+    </a>
+
+</header>
+
+
+<div class="container">
+
+    <h1>
+        Shopping Cart
+    </h1>
+
+
+    {% if cart_items %}
+
+        {% for item in cart_items %}
+
+        <div class="cart-item">
+
+            <div>
+
+                <div class="product-name">
+                    {{ item.name }}
+                </div>
+
+                <div class="brand">
+                    {{ item.brand }}
+                </div>
+
+                <div class="price">
+                    ₹{{ "{:,}".format(item.price) }}
+                </div>
+
+            </div>
+
+
+            <a
+                class="remove"
+                href="/remove-from-cart/{{ loop.index0 }}"
+            >
+                Remove
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+
+        <div class="total">
+
+            Total:
+            ₹{{ "{:,}".format(total) }}
+
+        </div>
+
+
+        <div class="buttons">
+
+            <a
+    class="button"
+    href="/checkout"
+>
+    Checkout
+</a>
+
+            <a
+                class="button"
+                href="/clear-cart"
+            >
+                Clear Cart
+            </a>
+
+        </div>
+
+
+    {% else %}
+
+        <div class="empty">
+
+            Your cart is empty.
+
+            <br><br>
+
+            <a
+                class="button"
+                href="/"
+            >
+                Start Shopping
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+<footer>
+
+    © 2026 My E-Commerce Store
+
+</footer>
+
+</body>
+
+</html>
