@@ -1,11 +1,10 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>My E-Commerce Store</title>
+    <title>My Store | Fashion & Lifestyle</title>
 
     <style>
         * {
@@ -15,11 +14,11 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #f7f7f7;
+            background: #f8f8f8;
             color: #222;
         }
 
-        /* TOP NAVIGATION */
+        /* TOP BAR */
         .topbar {
             background: #111;
             color: white;
@@ -27,36 +26,38 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
+            gap: 25px;
             flex-wrap: wrap;
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 25px;
             font-weight: bold;
+            white-space: nowrap;
         }
 
         .nav-links {
             display: flex;
             gap: 20px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .nav-links a {
             color: white;
             text-decoration: none;
-            font-size: 15px;
+            font-size: 14px;
         }
 
         .nav-links a:hover {
-            text-decoration: underline;
+            color: #d4af37;
         }
 
         /* SEARCH */
         .search-box {
             background: white;
-            padding: 8px 12px;
-            border-radius: 6px;
+            border-radius: 25px;
+            padding: 8px 14px;
             display: flex;
             align-items: center;
         }
@@ -64,7 +65,7 @@
         .search-box input {
             border: none;
             outline: none;
-            width: 180px;
+            width: 190px;
             font-size: 14px;
         }
 
@@ -72,7 +73,7 @@
             border: none;
             background: none;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 17px;
         }
 
         /* CATEGORIES */
@@ -81,48 +82,84 @@
             padding: 16px 5%;
             display: flex;
             justify-content: center;
-            gap: 28px;
+            gap: 30px;
             border-bottom: 1px solid #ddd;
             flex-wrap: wrap;
         }
 
         .categories a {
-            text-decoration: none;
             color: #333;
+            text-decoration: none;
             font-size: 14px;
+            font-weight: 500;
         }
 
         .categories a:hover {
-            color: #e65c00;
+            color: #b08d2f;
         }
 
         /* HERO */
         .hero {
+            min-height: 330px;
+            background: linear-gradient(135deg, #111, #333);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            padding: 55px 20px;
-            background: #eeeeee;
+            padding: 50px 20px;
+        }
+
+        .hero-content {
+            max-width: 750px;
         }
 
         .hero h1 {
-            margin: 0 0 12px;
-            font-size: 38px;
+            font-size: 48px;
+            margin: 0 0 15px;
+            letter-spacing: 1px;
         }
 
         .hero p {
-            font-size: 17px;
-            color: #555;
+            font-size: 18px;
+            color: #ddd;
+            margin-bottom: 25px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background: white;
+            color: #111;
+            text-decoration: none;
+            padding: 13px 28px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .hero-btn:hover {
+            background: #d4af37;
+            color: white;
         }
 
         /* PRODUCTS */
         .container {
             max-width: 1200px;
             margin: auto;
-            padding: 40px 20px;
+            padding: 55px 20px;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 30px;
+            font-size: 30px;
+            margin-bottom: 35px;
+        }
+
+        .section-title span {
+            display: block;
+            font-size: 13px;
+            color: #777;
+            font-weight: normal;
+            margin-top: 8px;
         }
 
         .products {
@@ -133,49 +170,82 @@
 
         .product {
             background: white;
-            padding: 20px;
             border-radius: 10px;
+            overflow: hidden;
             text-align: center;
-            box-shadow: 0 2px 10px #ddd;
-            transition: 0.2s;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            transition: 0.25s;
         }
 
         .product:hover {
-            transform: translateY(-4px);
+            transform: translateY(-6px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.14);
         }
 
         .product-image {
-            height: 180px;
-            background: #eeeeee;
-            border-radius: 8px;
+            height: 220px;
+            background: #f1f1f1;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 65px;
-            margin-bottom: 15px;
+            font-size: 80px;
+        }
+
+        .product-info {
+            padding: 22px;
         }
 
         .product h3 {
-            margin: 10px 0;
+            margin: 0 0 10px;
+            font-size: 20px;
         }
 
         .price {
-            font-size: 20px;
+            font-size: 21px;
             font-weight: bold;
-            margin: 12px 0;
+            margin: 12px 0 18px;
         }
 
         .add-cart {
+            width: 100%;
             background: #111;
             color: white;
             border: none;
-            padding: 11px 20px;
+            padding: 13px;
             border-radius: 5px;
             cursor: pointer;
+            font-weight: bold;
         }
 
         .add-cart:hover {
-            background: #e65c00;
+            background: #b08d2f;
+        }
+
+        /* INFO SECTION */
+        .features {
+            background: white;
+            padding: 40px 5%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .feature {
+            padding: 20px;
+        }
+
+        .feature-icon {
+            font-size: 35px;
+        }
+
+        .feature h3 {
+            margin: 10px 0;
+        }
+
+        .feature p {
+            color: #666;
+            font-size: 14px;
         }
 
         /* CART */
@@ -183,12 +253,13 @@
             position: fixed;
             right: 25px;
             bottom: 25px;
-            background: #e65c00;
+            background: #111;
             color: white;
-            padding: 14px 20px;
+            padding: 14px 22px;
             border-radius: 30px;
             font-weight: bold;
-            box-shadow: 0 3px 10px #aaa;
+            box-shadow: 0 4px 15px #999;
+            z-index: 1000;
         }
 
         /* FOOTER */
@@ -196,33 +267,51 @@
             background: #111;
             color: white;
             text-align: center;
-            padding: 25px;
-            margin-top: 30px;
+            padding: 28px;
+            margin-top: 0;
+        }
+
+        footer p {
+            margin: 0;
+            color: #ccc;
         }
 
         /* MOBILE */
         @media (max-width: 800px) {
-            .products {
-                grid-template-columns: 1fr 1fr;
-            }
 
             .topbar {
                 justify-content: center;
             }
+
+            .products {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
         }
 
         @media (max-width: 550px) {
+
             .products {
                 grid-template-columns: 1fr;
             }
 
-            .nav-links {
-                flex-wrap: wrap;
-                justify-content: center;
+            .categories {
+                gap: 15px;
             }
 
             .search-box input {
-                width: 130px;
+                width: 140px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
             }
         }
     </style>
@@ -242,10 +331,9 @@
             <a href="#">New Arrivals</a>
             <a href="#">Sale</a>
             <a href="/admin-login">Login</a>
-            <a href="/orders">Orders</a>    
+            <a href="/orders">Orders</a>
         </nav>
 
-        <!-- SEARCH -->
         <div class="search-box">
             <input
                 type="text"
@@ -263,12 +351,12 @@
     <div class="categories">
 
         <a href="/designers">Designers</a>
-<a href="/ready-to-wear">Ready-to-Wear</a>
-<a href="/shoes">Shoes</a>
-<a href="/bags">Bags</a>
-<a href="/accessories">Accessories</a>
-<a href="/jewelry">Jewelry</a>
-<a href="/beauty">Beauty</a>
+        <a href="/ready-to-wear">Ready-to-Wear</a>
+        <a href="/shoes">Shoes</a>
+        <a href="/bags">Bags</a>
+        <a href="/accessories">Accessories</a>
+        <a href="/jewelry">Jewelry</a>
+        <a href="/beauty">Beauty</a>
 
     </div>
 
@@ -276,20 +364,29 @@
     <!-- HERO -->
     <section class="hero">
 
-        <h1>Welcome to My Store</h1>
+        <div class="hero-content">
 
-        <p>
-            Discover quality products at great prices.
-        </p>
+            <h1>Discover Your Style</h1>
+
+            <p>
+                Explore premium fashion, accessories and lifestyle products.
+            </p>
+
+            <a href="#featured" class="hero-btn">
+                Shop Now
+            </a>
+
+        </div>
 
     </section>
 
 
     <!-- PRODUCTS -->
-    <main class="container">
+    <main class="container" id="featured">
 
         <h2 class="section-title">
             Featured Products
+            <span>Discover our popular products</span>
         </h2>
 
         <div class="products" id="productList">
@@ -301,18 +398,22 @@
                     💻
                 </div>
 
-                <h3>Laptop</h3>
+                <div class="product-info">
 
-                <p class="price">
-                    ₹45,000
-                </p>
+                    <h3>Laptop</h3>
 
-                <button
-                    class="add-cart"
-                    onclick="addToCart('Laptop', 45000)"
-                >
-                    Add to Cart
-                </button>
+                    <p class="price">
+                        ₹45,000
+                    </p>
+
+                    <button
+                        class="add-cart"
+                        onclick="addToCart('Laptop', 45000)"
+                    >
+                        Add to Cart
+                    </button>
+
+                </div>
 
             </div>
 
@@ -324,18 +425,22 @@
                     📱
                 </div>
 
-                <h3>Mobile Phone</h3>
+                <div class="product-info">
 
-                <p class="price">
-                    ₹15,000
-                </p>
+                    <h3>Mobile Phone</h3>
 
-                <button
-                    class="add-cart"
-                    onclick="addToCart('Mobile Phone', 15000)"
-                >
-                    Add to Cart
-                </button>
+                    <p class="price">
+                        ₹15,000
+                    </p>
+
+                    <button
+                        class="add-cart"
+                        onclick="addToCart('Mobile Phone', 15000)"
+                    >
+                        Add to Cart
+                    </button>
+
+                </div>
 
             </div>
 
@@ -347,24 +452,52 @@
                     🎧
                 </div>
 
-                <h3>Headphones</h3>
+                <div class="product-info">
 
-                <p class="price">
-                    ₹1,500
-                </p>
+                    <h3>Headphones</h3>
 
-                <button
-                    class="add-cart"
-                    onclick="addToCart('Headphones', 1500)"
-                >
-                    Add to Cart
-                </button>
+                    <p class="price">
+                        ₹1,500
+                    </p>
+
+                    <button
+                        class="add-cart"
+                        onclick="addToCart('Headphones', 1500)"
+                    >
+                        Add to Cart
+                    </button>
+
+                </div>
 
             </div>
 
         </div>
 
     </main>
+
+
+    <!-- FEATURES -->
+    <section class="features">
+
+        <div class="feature">
+            <div class="feature-icon">🚚</div>
+            <h3>Fast Delivery</h3>
+            <p>Quick and reliable delivery.</p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">🔒</div>
+            <h3>Secure Shopping</h3>
+            <p>Your shopping experience matters to us.</p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">⭐</div>
+            <h3>Quality Products</h3>
+            <p>Products selected for our customers.</p>
+        </div>
+
+    </section>
 
 
     <!-- CART -->
@@ -417,7 +550,7 @@
                     .toLowerCase();
 
                 if (name.includes(search)) {
-                    product.style.display = "block";
+                    product.style.display = "";
                 } else {
                     product.style.display = "none";
                 }
@@ -430,4 +563,3 @@
 
 </body>
 </html>
-
