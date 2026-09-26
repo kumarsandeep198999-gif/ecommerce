@@ -3,108 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ready-to-Wear</title>
+    <title>Ready-to-Wear | My Store</title>
 
     <style>
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
-            background: #f7f7f7;
+            background: #f6f3ef;
             color: #111;
         }
 
+        /* HEADER */
         header {
+            height: 75px;
             background: #111;
             color: white;
-            padding: 20px 40px;
+            padding: 0 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 25px;
             font-weight: bold;
+            letter-spacing: 3px;
         }
 
-        header a {
+        .home {
             color: white;
             text-decoration: none;
+            border: 1px solid #777;
+            padding: 11px 22px;
+            border-radius: 25px;
+            transition: 0.3s;
         }
 
-        .container {
+        .home:hover {
+            background: white;
+            color: #111;
+        }
+
+        /* HERO */
+        .hero {
             max-width: 1200px;
             margin: auto;
-            padding: 40px 20px;
+            padding: 70px 20px 50px;
+            text-align: center;
         }
 
-        h1 {
-            text-align: center;
-            font-size: 36px;
-            margin-bottom: 10px;
+        .hero-small {
+            font-size: 12px;
+            letter-spacing: 4px;
+            color: #777;
+            text-transform: uppercase;
+            margin-bottom: 15px;
         }
 
-        .subtitle {
-            text-align: center;
+        .hero h1 {
+            font-family: Georgia, serif;
+            font-size: 58px;
+            font-weight: normal;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
             color: #666;
-            margin-bottom: 35px;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        .line {
+            width: 70px;
+            height: 2px;
+            background: #111;
+            margin: 25px auto;
+        }
+
+        /* IMAGE BANNER */
+        .banner {
+            max-width: 1200px;
+            height: 300px;
+            margin: 0 auto 50px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .banner img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+            display: block;
+        }
+
+        /* CATEGORIES */
+        .container {
+            max-width: 1250px;
+            margin: auto;
+            padding: 0 25px 70px;
         }
 
         .categories {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            gap: 22px;
         }
 
         .category {
             background: white;
+            min-height: 210px;
+            padding: 28px 22px;
             border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 30px 15px;
-            text-align: center;
-            transition: 0.2s;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: 0.3s;
         }
 
         .category:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 5px 15px #ddd;
+            transform: translateY(-7px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+        }
+
+        .number {
+            color: #999;
+            font-size: 12px;
+            letter-spacing: 2px;
         }
 
         .category h2 {
-            font-size: 20px;
-            margin-bottom: 20px;
+            font-family: Georgia, serif;
+            font-size: 25px;
+            font-weight: normal;
+            margin: 25px 0;
         }
 
         .category a {
-            display: inline-block;
+            width: fit-content;
             background: #111;
             color: white;
             text-decoration: none;
-            padding: 10px 18px;
-            border-radius: 5px;
+            padding: 12px 18px;
+            font-size: 13px;
+            border-radius: 3px;
+            transition: 0.3s;
         }
 
-        footer {
-            margin-top: 50px;
+        .category a:hover {
+            background: #444;
+        }
+
+        /* FIRST CARD */
+        .category:first-child {
             background: #111;
             color: white;
-            text-align: center;
-            padding: 25px;
         }
 
-        @media (max-width: 800px) {
+        .category:first-child .number {
+            color: #aaa;
+        }
+
+        .category:first-child a {
+            background: white;
+            color: #111;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #111;
+            color: #aaa;
+            text-align: center;
+            padding: 30px;
+            font-size: 13px;
+        }
+
+        footer span {
+            color: white;
+        }
+
+        /* TABLET */
+        @media (max-width: 1000px) {
             .categories {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 48px;
             }
         }
 
-        @media (max-width: 500px) {
+        /* MOBILE */
+        @media (max-width: 700px) {
+            header {
+                padding: 0 20px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .hero {
+                padding: 50px 20px 35px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .banner {
+                height: auto;
+                grid-template-columns: 1fr;
+                padding: 0 18px;
+            }
+
+            .banner img {
+                height: 220px;
+            }
+
+            .categories {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
+            }
+
+            .category {
+                min-height: 190px;
+                padding: 22px 16px;
+            }
+
+            .category h2 {
+                font-size: 21px;
+            }
+        }
+
+        /* SMALL MOBILE */
+        @media (max-width: 450px) {
             .categories {
                 grid-template-columns: 1fr;
+            }
+
+            .banner img {
+                height: 250px;
+            }
+
+            .hero h1 {
+                font-size: 34px;
             }
         }
     </style>
@@ -114,105 +265,146 @@
 
 <header>
     <div class="logo">MY STORE</div>
-    <a href="/">← Home</a>
+    <a href="/" class="home">← Home</a>
 </header>
 
-<div class="container">
+
+<section class="hero">
+    <div class="hero-small">Fashion Collection</div>
 
     <h1>Ready-to-Wear</h1>
 
-    <p class="subtitle">
+    <p>
         Explore our Ready-to-Wear collection
+        and discover styles designed for every occasion.
     </p>
+
+    <div class="line"></div>
+</section>
+
+
+<!-- YOUR 3 IMAGES -->
+
+<section class="banner">
+
+    <img src="{{ url_for('static', filename='images/1.jfif') }}"
+         alt="Ready-to-Wear Fashion">
+
+    <img src="{{ url_for('static', filename='images/2.jfif') }}"
+         alt="Fashion Collection">
+
+    <img src="{{ url_for('static', filename='images/3.jfif') }}"
+         alt="Ready-to-Wear Collection">
+
+</section>
+
+
+<div class="container">
 
     <div class="categories">
 
         <div class="category">
+            <div class="number">01</div>
             <h2>All Products</h2>
-            <a href="/ready-to-wear/all-products">View Products</a>
+            <a href="/ready-to-wear/all-products">View Products →</a>
         </div>
 
         <div class="category">
+            <div class="number">02</div>
             <h2>New Brands</h2>
-            <a href="/ready-to-wear/new-brands">View Products</a>
+            <a href="/ready-to-wear/new-brands">View Products →</a>
         </div>
 
         <div class="category">
+            <div class="number">03</div>
             <h2>Jackets</h2>
-            <a href="/ready-to-wear/jackets">View Products</a>
+            <a href="/ready-to-wear/jackets">View Products →</a>
         </div>
 
         <div class="category">
+            <div class="number">04</div>
             <h2>Knitwear</h2>
-            <a href="/ready-to-wear/knitwear">View Products</a>
+            <a href="/ready-to-wear/knitwear">View Products →</a>
         </div>
 
         <div class="category">
+            <div class="number">05</div>
             <h2>Leather</h2>
-            <a href="/ready-to-wear/leather">View Products</a>
+            <a href="/ready-to-wear/leather">View Products →</a>
         </div>
 
         <div class="category">
+            <div class="number">06</div>
             <h2>Tops & Shirts</h2>
-            <a href="/ready-to-wear/tops-shirts">View Products</a>
+            <a href="/ready-to-wear/tops-shirts">View Products →</a>
         </div>
 
         <div class="category">
+            <div class="number">07</div>
             <h2>Sets</h2>
-            <a href="/ready-to-wear/sets">View Products</a>
+            <a href="/ready-to-wear/sets">View Products →</a>
         </div>
 
         <div class="category">
+            <div class="number">08</div>
             <h2>Skirts</h2>
-            <a href="/ready-to-wear/skirts">View Products</a>
+            <a href="/ready-to-wear/skirts">View Products →</a>
         </div>
 
         <div class="category">
+            <div class="number">09</div>
             <h2>Coats</h2>
-            <a href="/ready-to-wear/coats">View Products</a>
+            <a href="/ready-to-wear/coats">View Products →</a>
         </div>
 
         <div class="category">
+            <div class="number">10</div>
             <h2>Dresses</h2>
-            <a href="/ready-to-wear/dresses">View Products</a>
+            <a href="/ready-to-wear/dresses">View Products →</a>
         </div>
 
         <div class="category">
+            <div class="number">11</div>
             <h2>Denim</h2>
-            <a href="/ready-to-wear/denim">View Products</a>
+            <a href="/ready-to-wear/denim">View Products →</a>
         </div>
 
         <div class="category">
+            <div class="number">12</div>
             <h2>Pants</h2>
-            <a href="/ready-to-wear/pants">View Products</a>
+            <a href="/ready-to-wear/pants">View Products →</a>
         </div>
 
         <div class="category">
+            <div class="number">13</div>
             <h2>Suits</h2>
-            <a href="/ready-to-wear/suits">View Products</a>
+            <a href="/ready-to-wear/suits">View Products →</a>
         </div>
 
         <div class="category">
+            <div class="number">14</div>
             <h2>Sweatshirts</h2>
-            <a href="/ready-to-wear/sweatshirts">View Products</a>
+            <a href="/ready-to-wear/sweatshirts">View Products →</a>
         </div>
 
         <div class="category">
+            <div class="number">15</div>
             <h2>Shorts</h2>
-            <a href="/ready-to-wear/shorts">View Products</a>
+            <a href="/ready-to-wear/shorts">View Products →</a>
         </div>
 
         <div class="category">
+            <div class="number">16</div>
             <h2>Beachwear</h2>
-            <a href="/ready-to-wear/beachwear">View Products</a>
+            <a href="/ready-to-wear/beachwear">View Products →</a>
         </div>
 
     </div>
-
 </div>
 
+
 <footer>
-    © 2026 My E-Commerce Store
+    © 2026 <span>My E-Commerce Store</span>
 </footer>
 
 </body>

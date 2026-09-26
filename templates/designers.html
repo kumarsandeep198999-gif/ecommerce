@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Designers - My E-Commerce Store</title>
+    <title>Designers | My Store</title>
 
     <style>
         * {
@@ -14,163 +14,237 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #f7f7f7;
-            color: #111;
+            background: #f6f5f2;
+            color: #171717;
         }
 
-        /* Header */
-        header {
+        /* HEADER */
+        .topbar {
             background: #111;
-            color: white;
-            padding: 20px 40px;
+            padding: 18px 5%;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+            flex-wrap: wrap;
         }
 
         .logo {
+            color: white;
             font-size: 24px;
             font-weight: bold;
+            text-decoration: none;
+            letter-spacing: 1px;
         }
 
-        header a {
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
             color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #d4af37;
+        }
+
+        /* CATEGORIES */
+        .categories {
+            background: white;
+            padding: 16px 5%;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            border-bottom: 1px solid #ddd;
+            flex-wrap: wrap;
+        }
+
+        .categories a {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .categories a:hover {
+            color: #b08d2f;
+        }
+
+        /* HERO */
+        .hero {
+            background: #171717;
+            color: white;
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        .breadcrumb {
+            font-size: 13px;
+            color: #bbb;
+            margin-bottom: 18px;
+        }
+
+        .breadcrumb a {
+            color: #ddd;
             text-decoration: none;
         }
 
-        /* Main */
+        .breadcrumb a:hover {
+            color: #d4af37;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: 44px;
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            max-width: 600px;
+            margin: 18px auto 0;
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        /* DESIGNER GRID */
         .container {
-            max-width: 1200px;
+            max-width: 1250px;
             margin: auto;
-            padding: 35px 20px;
+            padding: 60px 20px;
         }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 30px;
-        }
-
-        /* Menu */
-        .menu {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 25px;
-        }
-
-        .menu button {
-            padding: 12px 20px;
-            border: 1px solid #222;
-            background: white;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .menu button:hover {
-            background: #111;
-            color: white;
-        }
-
-        /* Search */
-        .search {
-            display: block;
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto 35px;
-            padding: 14px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        /* Alphabet */
-        .alphabet {
+        .section-heading {
             text-align: center;
             margin-bottom: 35px;
         }
 
-        .alphabet button {
-            margin: 4px;
-            padding: 8px 12px;
-            border: 1px solid #ccc;
-            background: white;
-            cursor: pointer;
-            border-radius: 4px;
+        .section-heading h2 {
+            margin: 0;
+            font-size: 30px;
         }
 
-        .alphabet button:hover {
-            background: #111;
-            color: white;
-        }
-
-        /* Brand Grid */
-        .brands {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .brand {
-            background: white;
-            padding: 30px 20px;
-            text-align: center;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            transition: 0.2s;
-        }
-
-        .brand:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px #ddd;
-        }
-
-        .brand h2 {
-            margin: 0 0 10px;
-        }
-
-        .brand a {
-            text-decoration: none;
-            color: #111;
-        }
-
-        .brand p {
+        .section-heading p {
             color: #777;
-            margin-bottom: 15px;
+            margin: 10px 0 0;
         }
 
-        .view {
-            display: inline-block;
-            background: #111;
-            color: white;
-            padding: 10px 18px;
-            border-radius: 5px;
+        .designer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+        .designer-card {
+            display: block;
+            min-height: 265px;
+            background: white;
+            color: #171717;
             text-decoration: none;
+            border: 1px solid #e4e4e4;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            transition: 0.25s;
         }
 
-        /* Footer */
-        footer {
-            margin-top: 50px;
-            background: #111;
+        .designer-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.13);
+        }
+
+        .designer-monogram {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: white;
-            text-align: center;
-            padding: 25px;
+            font-size: 38px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #171717, #4d4d4d);
         }
 
-        /* Mobile */
-        @media (max-width: 700px) {
-            .brands {
+        .designer-card:nth-child(2n) .designer-monogram {
+            background: linear-gradient(135deg, #74522d, #c8a566);
+        }
+
+        .designer-card:nth-child(3n) .designer-monogram {
+            background: linear-gradient(135deg, #40505b, #8495a1);
+        }
+
+        .designer-card:nth-child(4n) .designer-monogram {
+            background: linear-gradient(135deg, #51363c, #9e7277);
+        }
+
+        .designer-info {
+            padding: 22px;
+        }
+
+        .collection {
+            margin: 0 0 8px;
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .designer-info h2 {
+            margin: 0;
+            font-size: 23px;
+        }
+
+        .view-brand {
+            display: inline-block;
+            margin-top: 20px;
+            color: #171717;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .designer-card:hover .view-brand {
+            color: #b08d2f;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #111;
+            color: #ccc;
+            text-align: center;
+            padding: 28px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* MOBILE */
+        @media (max-width: 950px) {
+            .designer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .topbar {
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .designer-grid {
                 grid-template-columns: 1fr;
             }
 
-            header {
-                padding: 18px;
+            .categories {
+                gap: 15px;
             }
         }
     </style>
@@ -178,292 +252,179 @@
 
 <body>
 
-<!-- Header -->
-<header>
-    <div class="logo">MY STORE</div>
-    <a href="/">← Home</a>
-</header>
+    <header class="topbar">
 
+        <a class="logo" href="/">
+            🛒 MY STORE
+        </a>
 
-<div class="container">
+        <nav class="nav-links">
+            <a href="/">Home</a>
+            <a href="/ready-to-wear">New Arrivals</a>
+            <a href="/sale">Sale</a>
+            <a href="/admin-login">Login</a>
+            <a href="/orders">Orders</a>
+        </nav>
 
-    <h1>Designers</h1>
+    </header>
 
-    <p class="subtitle">
-        Discover our designer brands
-    </p>
-
-
-    <!-- Main Menu -->
-    <div class="menu">
-
-        <button onclick="showAll()">
-            All Brands
-        </button>
-
-        <button onclick="showNew()">
-            New Brands
-        </button>
-
+    <div class="categories">
+        <a href="/designers">Designers</a>
+        <a href="/ready-to-wear">Ready-to-Wear</a>
+        <a href="/shoes">Shoes</a>
+        <a href="/bags">Bags</a>
+        <a href="/accessories">Accessories</a>
+        <a href="/jewelry">Jewelry</a>
+        <a href="/beauty">Beauty</a>
     </div>
 
+    <section class="hero">
 
-    <!-- Search -->
-    <input
-        type="text"
-        id="search"
-        class="search"
-        placeholder="Search designer brand..."
-        onkeyup="searchBrands()"
-    >
-
-
-    <!-- Alphabet -->
-    <div class="alphabet">
-
-        <button onclick="filterLetter('A')">A</button>
-        <button onclick="filterLetter('B')">B</button>
-        <button onclick="filterLetter('C')">C</button>
-        <button onclick="filterLetter('D')">D</button>
-        <button onclick="filterLetter('I')">I</button>
-        <button onclick="filterLetter('K')">K</button>
-        <button onclick="filterLetter('L')">L</button>
-        <button onclick="filterLetter('M')">M</button>
-        <button onclick="filterLetter('T')">T</button>
-        <button onclick="showAll()">ALL</button>
-
-    </div>
-
-
-    <!-- Brands -->
-    <div class="brands" id="brandList">
-
-
-        <!-- Ami Paris -->
-        <div class="brand" data-name="Ami Paris">
-            <h2>Ami Paris</h2>
-            <p>Designer Collection</p>
-            <a class="view" href="/brand/ami-paris">
-                View Brand
-            </a>
+        <div class="breadcrumb">
+            <a href="/">Home</a> / Designers
         </div>
 
+        <h1>Meet the Designers</h1>
 
-        <!-- Balmain -->
-        <div class="brand" data-name="Balmain">
-            <h2>Balmain</h2>
-            <p>Designer Collection</p>
-            <a class="view" href="/brand/balmain">
-                View Brand
-            </a>
+        <p>
+            Explore curated collections from the world's most admired fashion houses.
+        </p>
+
+    </section>
+
+    <main class="container">
+
+        <div class="section-heading">
+            <h2>Our Designer Edit</h2>
+            <p>Discover luxury fashion from iconic brands.</p>
         </div>
 
+        <section class="designer-grid">
 
-        <!-- Burberry -->
-        <div class="brand" data-name="Burberry">
-            <h2>Burberry</h2>
-            <p>Designer Collection</p>
-            <a class="view" href="/brand/burberry">
-                View Brand
+            <a class="designer-card" href="/brand/ami-paris">
+                <div class="designer-monogram">AP</div>
+                <div class="designer-info">
+                    <p class="collection">Designer Collection</p>
+                    <h2>Ami Paris</h2>
+                    <span class="view-brand">View Brand →</span>
+                </div>
             </a>
-        </div>
 
-
-        <!-- Celine -->
-        <div class="brand" data-name="Celine">
-            <h2>Celine</h2>
-            <p>Designer Collection</p>
-            <a class="view" href="/brand/celine">
-                View Brand
+            <a class="designer-card" href="/brand/balmain">
+                <div class="designer-monogram">B</div>
+                <div class="designer-info">
+                    <p class="collection">Designer Collection</p>
+                    <h2>Balmain</h2>
+                    <span class="view-brand">View Brand →</span>
+                </div>
             </a>
-        </div>
 
-
-        <!-- Chloé -->
-        <div class="brand" data-name="Chloé">
-            <h2>Chloé</h2>
-            <p>Designer Collection</p>
-            <a class="view" href="/brand/chloe">
-                View Brand
+            <a class="designer-card" href="/brand/burberry">
+                <div class="designer-monogram">B</div>
+                <div class="designer-info">
+                    <p class="collection">Designer Collection</p>
+                    <h2>Burberry</h2>
+                    <span class="view-brand">View Brand →</span>
+                </div>
             </a>
-        </div>
 
-
-        <!-- Dior -->
-        <div class="brand" data-name="Dior">
-            <h2>Dior</h2>
-            <p>Designer Collection</p>
-            <a class="view" href="/brand/dior">
-                View Brand
+            <a class="designer-card" href="/brand/celine">
+                <div class="designer-monogram">C</div>
+                <div class="designer-info">
+                    <p class="collection">Designer Collection</p>
+                    <h2>Celine</h2>
+                    <span class="view-brand">View Brand →</span>
+                </div>
             </a>
-        </div>
 
-
-        <!-- Isabel Marant -->
-        <div class="brand" data-name="Isabel Marant">
-            <h2>Isabel Marant</h2>
-            <p>Designer Collection</p>
-            <a class="view" href="/brand/isabel-marant">
-                View Brand
+            <a class="designer-card" href="/brand/chloe">
+                <div class="designer-monogram">C</div>
+                <div class="designer-info">
+                    <p class="collection">Designer Collection</p>
+                    <h2>Chloé</h2>
+                    <span class="view-brand">View Brand →</span>
+                </div>
             </a>
-        </div>
 
-
-        <!-- Khaite -->
-        <div class="brand" data-name="Khaite">
-            <h2>Khaite</h2>
-            <p>Designer Collection</p>
-            <a class="view" href="/brand/khaite">
-                View Brand
+            <a class="designer-card" href="/brand/dior">
+                <div class="designer-monogram">D</div>
+                <div class="designer-info">
+                    <p class="collection">Designer Collection</p>
+                    <h2>Dior</h2>
+                    <span class="view-brand">View Brand →</span>
+                </div>
             </a>
-        </div>
 
-
-        <!-- Lemaire -->
-        <div class="brand" data-name="Lemaire">
-            <h2>Lemaire</h2>
-            <p>Designer Collection</p>
-            <a class="view" href="/brand/lemaire">
-                View Brand
+            <a class="designer-card" href="/brand/isabel-marant">
+                <div class="designer-monogram">IM</div>
+                <div class="designer-info">
+                    <p class="collection">Designer Collection</p>
+                    <h2>Isabel Marant</h2>
+                    <span class="view-brand">View Brand →</span>
+                </div>
             </a>
-        </div>
 
-
-        <!-- Loewe -->
-        <div class="brand" data-name="Loewe">
-            <h2>Loewe</h2>
-            <p>Designer Collection</p>
-            <a class="view" href="/brand/loewe">
-                View Brand
+            <a class="designer-card" href="/brand/khaite">
+                <div class="designer-monogram">K</div>
+                <div class="designer-info">
+                    <p class="collection">Designer Collection</p>
+                    <h2>Khaite</h2>
+                    <span class="view-brand">View Brand →</span>
+                </div>
             </a>
-        </div>
 
-
-        <!-- Louis Vuitton -->
-        <div class="brand" data-name="Louis Vuitton">
-            <h2>Louis Vuitton</h2>
-            <p>Designer Collection</p>
-            <a class="view" href="/brand/louis-vuitton">
-                View Brand
+            <a class="designer-card" href="/brand/lemaire">
+                <div class="designer-monogram">L</div>
+                <div class="designer-info">
+                    <p class="collection">Designer Collection</p>
+                    <h2>Lemaire</h2>
+                    <span class="view-brand">View Brand →</span>
+                </div>
             </a>
-        </div>
 
-
-        <!-- Miu Miu -->
-        <div class="brand" data-name="Miu Miu">
-            <h2>Miu Miu</h2>
-            <p>Designer Collection</p>
-            <a class="view" href="/brand/miu-miu">
-                View Brand
+            <a class="designer-card" href="/brand/loewe">
+                <div class="designer-monogram">L</div>
+                <div class="designer-info">
+                    <p class="collection">Designer Collection</p>
+                    <h2>Loewe</h2>
+                    <span class="view-brand">View Brand →</span>
+                </div>
             </a>
-        </div>
 
-
-        <!-- The Row -->
-        <div class="brand" data-name="The Row">
-            <h2>The Row</h2>
-            <p>Designer Collection</p>
-            <a class="view" href="/brand/the-row">
-                View Brand
+            <a class="designer-card" href="/brand/louis-vuitton">
+                <div class="designer-monogram">LV</div>
+                <div class="designer-info">
+                    <p class="collection">Designer Collection</p>
+                    <h2>Louis Vuitton</h2>
+                    <span class="view-brand">View Brand →</span>
+                </div>
             </a>
-        </div>
 
+            <a class="designer-card" href="/brand/miu-miu">
+                <div class="designer-monogram">MM</div>
+                <div class="designer-info">
+                    <p class="collection">Designer Collection</p>
+                    <h2>Miu Miu</h2>
+                    <span class="view-brand">View Brand →</span>
+                </div>
+            </a>
 
-    </div>
+            <a class="designer-card" href="/brand/the-row">
+                <div class="designer-monogram">TR</div>
+                <div class="designer-info">
+                    <p class="collection">Designer Collection</p>
+                    <h2>The Row</h2>
+                    <span class="view-brand">View Brand →</span>
+                </div>
+            </a>
 
-</div>
+        </section>
 
+    </main>
 
-<!-- Footer -->
-<footer>
-    © 2026 My E-Commerce Store
-</footer>
-
-
-<script>
-
-    function showAll() {
-
-        let brands = document.querySelectorAll(".brand");
-
-        brands.forEach(function(brand) {
-            brand.style.display = "block";
-        });
-
-        document.getElementById("search").value = "";
-    }
-
-
-    function searchBrands() {
-
-        let search =
-            document.getElementById("search").value.toLowerCase();
-
-        let brands =
-            document.querySelectorAll(".brand");
-
-        brands.forEach(function(brand) {
-
-            let name =
-                brand.getAttribute("data-name").toLowerCase();
-
-            if (name.includes(search)) {
-                brand.style.display = "block";
-            } else {
-                brand.style.display = "none";
-            }
-
-        });
-
-    }
-
-
-    function filterLetter(letter) {
-
-        let brands =
-            document.querySelectorAll(".brand");
-
-        brands.forEach(function(brand) {
-
-            let name =
-                brand.getAttribute("data-name");
-
-            if (name.toUpperCase().startsWith(letter)) {
-                brand.style.display = "block";
-            } else {
-                brand.style.display = "none";
-            }
-
-        });
-
-    }
-
-
-    function showNew() {
-
-        let brands =
-            document.querySelectorAll(".brand");
-
-        brands.forEach(function(brand) {
-
-            let name =
-                brand.getAttribute("data-name");
-
-            if (
-                name === "Ami Paris" ||
-                name === "Khaite" ||
-                name === "The Row"
-            ) {
-                brand.style.display = "block";
-            } else {
-                brand.style.display = "none";
-            }
-
-        });
-
-    }
-
-</script>
+    <footer>
+        <p>© 2026 My E-Commerce Store</p>
+    </footer>
 
 </body>
 </html>

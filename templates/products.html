@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,6 +38,10 @@
             text-decoration: none;
             color: #222;
             margin-left: 25px;
+        }
+
+        .header-links a:hover {
+            text-decoration: underline;
         }
 
         .categories {
@@ -88,7 +93,7 @@
 
         .product-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
         }
 
         .product-image {
@@ -105,6 +110,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        .no-image {
+            color: #777;
+            font-size: 14px;
         }
 
         .product-info {
@@ -167,6 +177,10 @@
                 gap: 15px;
             }
 
+            .header-links a {
+                margin-left: 10px;
+            }
+
             .categories a {
                 display: inline-block;
                 margin: 5px;
@@ -179,9 +193,12 @@
         }
 
     </style>
+
 </head>
 
+
 <body>
+
 
     <!-- Header -->
 
@@ -193,7 +210,9 @@
 
         <div class="header-links">
 
-            <a href="/">Home</a>
+            <a href="/">
+                Home
+            </a>
 
             <a href="/ready-to-wear">
                 Ready-to-Wear
@@ -216,22 +235,69 @@
 
     <div class="categories">
 
-        <a href="/ready-to-wear/all-products">All Products</a>
-        <a href="/ready-to-wear/new-brands">New Brands</a>
-        <a href="/ready-to-wear/jackets">Jackets</a>
-        <a href="/ready-to-wear/knitwear">Knitwear</a>
-        <a href="/ready-to-wear/leather">Leather</a>
-        <a href="/ready-to-wear/tops-shirts">Tops & Shirts</a>
-        <a href="/ready-to-wear/sets">Sets</a>
-        <a href="/ready-to-wear/skirts">Skirts</a>
-        <a href="/ready-to-wear/coats">Coats</a>
-        <a href="/ready-to-wear/dresses">Dresses</a>
-        <a href="/ready-to-wear/denim">Denim</a>
-        <a href="/ready-to-wear/pants">Pants</a>
-        <a href="/ready-to-wear/suits">Suits</a>
-        <a href="/ready-to-wear/sweatshirts">Sweatshirts</a>
-        <a href="/ready-to-wear/shorts">Shorts</a>
-        <a href="/ready-to-wear/beachwear">Beachwear</a>
+        <a href="/ready-to-wear/all-products">
+            All Products
+        </a>
+
+        <a href="/ready-to-wear/new-brands">
+            New Brands
+        </a>
+
+        <a href="/ready-to-wear/jackets">
+            Jackets
+        </a>
+
+        <a href="/ready-to-wear/knitwear">
+            Knitwear
+        </a>
+
+        <a href="/ready-to-wear/leather">
+            Leather
+        </a>
+
+        <a href="/ready-to-wear/tops-shirts">
+            Tops & Shirts
+        </a>
+
+        <a href="/ready-to-wear/sets">
+            Sets
+        </a>
+
+        <a href="/ready-to-wear/skirts">
+            Skirts
+        </a>
+
+        <a href="/ready-to-wear/coats">
+            Coats
+        </a>
+
+        <a href="/ready-to-wear/dresses">
+            Dresses
+        </a>
+
+        <a href="/ready-to-wear/denim">
+            Denim
+        </a>
+
+        <a href="/ready-to-wear/pants">
+            Pants
+        </a>
+
+        <a href="/ready-to-wear/suits">
+            Suits
+        </a>
+
+        <a href="/ready-to-wear/sweatshirts">
+            Sweatshirts
+        </a>
+
+        <a href="/ready-to-wear/shorts">
+            Shorts
+        </a>
+
+        <a href="/ready-to-wear/beachwear">
+            Beachwear
+        </a>
 
     </div>
 
@@ -259,9 +325,12 @@
 
         <div class="product-card">
 
+
+            <!-- Product Image -->
+
             <div class="product-image">
 
-                {% if product.image is defined %}
+                {% if product.image is defined and product.image %}
 
                     <img
                         src="{{ url_for('static', filename='images/' + product.image) }}"
@@ -270,12 +339,16 @@
 
                 {% else %}
 
-                    {{ product.name }}
+                    <div class="no-image">
+                        {{ product.name }}
+                    </div>
 
                 {% endif %}
 
             </div>
 
+
+            <!-- Product Information -->
 
             <div class="product-info">
 
@@ -295,7 +368,7 @@
                 <!-- ADD TO CART -->
 
                 <form
-                    action="/add-to-cart"
+                    action="{{ url_for('add_to_cart') }}"
                     method="POST"
                 >
 
@@ -317,6 +390,15 @@
                         value="{{ product.price }}"
                     >
 
+                    <!-- Product Image -->
+
+                    <input
+                        type="hidden"
+                        name="image"
+                        value="{{ product.image if product.image is defined else '' }}"
+                    >
+
+
                     <button
                         type="submit"
                         class="add-cart"
@@ -329,6 +411,12 @@
             </div>
 
         </div>
+
+        {% else %}
+
+        <p style="text-align:center; width:100%;">
+            No products found.
+        </p>
 
         {% endfor %}
 
@@ -343,5 +431,7 @@
 
     </footer>
 
+
 </body>
+
 </html>

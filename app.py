@@ -1,56 +1,51 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, session, redirect, url_for, request
 import sqlite3
 import json
 
 app = Flask(__name__)
-app.secret_key = "my-secret-key-123"
+app.secret_key = "my-ecommerce-secret-key"
+
+DATABASE = "orders.db"
 
 
 # =========================
 # DATABASE
 # =========================
 
-DB_NAME = "orders.db"
-
-
-def get_db():
-    conn = sqlite3.connect(DB_NAME)
-    conn.row_factory = sqlite3.Row
-    return conn
-
-
 def init_db():
-    conn = get_db()
 
-    conn.execute("""
+    conn = sqlite3.connect(DATABASE)
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
         CREATE TABLE IF NOT EXISTS orders (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            mobile TEXT NOT NULL,
+            address TEXT NOT NULL,
+            city TEXT NOT NULL,
+            state TEXT NOT NULL,
+            pincode TEXT NOT NULL,
             items TEXT NOT NULL,
-            total REAL NOT NULL,
+            total INTEGER NOT NULL,
             status TEXT DEFAULT 'Pending'
         )
     """)
+
+    # पुराने database में status column नहीं है तो add करें
+    try:
+        cursor.execute(
+            "ALTER TABLE orders ADD COLUMN status TEXT DEFAULT 'Pending'"
+        )
+    except sqlite3.OperationalError:
+        pass
 
     conn.commit()
     conn.close()
 
 
-def add_status_column():
-    conn = get_db()
-
-    try:
-        conn.execute(
-            "ALTER TABLE orders ADD COLUMN status TEXT DEFAULT 'Pending'"
-        )
-        conn.commit()
-    except sqlite3.OperationalError:
-        pass
-
-    conn.close()
-
-
 init_db()
-add_status_column()
 
 
 # =========================
@@ -81,6 +76,189 @@ def ready_to_wear():
 
 
 # =========================
+# SHOES
+# =========================
+
+@app.route("/shoes")
+def shoes():
+
+    shoe_products = [
+        {
+            "brand": "Balmain",
+            "name": "Designer Sneakers",
+            "price": 45000,
+            "image": "1.jfif"
+        },
+        {
+            "brand": "Celine",
+            "name": "Classic Sneakers",
+            "price": 38000,
+            "image": "2.jfif"
+        },
+        {
+            "brand": "Loewe",
+            "name": "Leather Shoes",
+            "price": 55000,
+            "image": "3.jfif"
+        }
+    ]
+
+    return render_template(
+        "products.html",
+        category="Shoes",
+        products=shoe_products
+    )
+
+
+# =========================
+# BAGS
+# =========================
+
+@app.route("/bags")
+def bags():
+
+    bag_products = [
+        {
+            "brand": "Dior",
+            "name": "Classic Handbag",
+            "price": 55000
+        },
+        {
+            "brand": "Celine",
+            "name": "Leather Bag",
+            "price": 65000
+        },
+        {
+            "brand": "Loewe",
+            "name": "Designer Bag",
+            "price": 75000
+        },
+        {
+            "brand": "Balmain",
+            "name": "Luxury Shoulder Bag",
+            "price": 85000
+        }
+    ]
+
+    return render_template(
+        "products.html",
+        category="Bags",
+        products=bag_products
+    )
+
+
+# =========================
+# ACCESSORIES
+# =========================
+
+@app.route("/accessories")
+def accessories():
+
+    accessory_products = [
+        {
+            "brand": "Dior",
+            "name": "Designer Belt",
+            "price": 25000
+        },
+        {
+            "brand": "Celine",
+            "name": "Fashion Sunglasses",
+            "price": 30000
+        },
+        {
+            "brand": "Loewe",
+            "name": "Leather Wallet",
+            "price": 22000
+        },
+        {
+            "brand": "Balmain",
+            "name": "Designer Cap",
+            "price": 18000
+        }
+    ]
+
+    return render_template(
+        "products.html",
+        category="Accessories",
+        products=accessory_products
+    )
+
+
+# =========================
+# JEWELRY
+# =========================
+
+@app.route("/jewelry")
+def jewelry():
+
+    jewelry_products = [
+        {
+            "brand": "Dior",
+            "name": "Gold Necklace",
+            "price": 45000
+        },
+        {
+            "brand": "Celine",
+            "name": "Designer Earrings",
+            "price": 28000
+        },
+        {
+            "brand": "Loewe",
+            "name": "Luxury Bracelet",
+            "price": 35000
+        },
+        {
+            "brand": "Balmain",
+            "name": "Designer Ring",
+            "price": 25000
+        }
+    ]
+
+    return render_template(
+        "products.html",
+        category="Jewelry",
+        products=jewelry_products
+    )
+
+
+# =========================
+# BEAUTY
+# =========================
+
+@app.route("/beauty")
+def beauty():
+
+    beauty_products = [
+        {
+            "brand": "Dior",
+            "name": "Beauty Cream",
+            "price": 4500
+        },
+        {
+            "brand": "Celine",
+            "name": "Face Serum",
+            "price": 3500
+        },
+        {
+            "brand": "Balmain",
+            "name": "Lipstick",
+            "price": 2500
+        },
+        {
+            "brand": "Loewe",
+            "name": "Perfume",
+            "price": 6500
+        }
+    ]
+
+    return render_template(
+        "products.html",
+        category="Beauty",
+        products=beauty_products
+    )
+
+
+# =========================
 # SALE
 # =========================
 
@@ -89,19 +267,16 @@ def sale():
 
     sale_products = [
         {
-            "brand": "Balmain",
-            "name": "Designer Jacket",
-            "price": 65000
-        },
-        {
-            "brand": "Classic",
-            "name": "Handbag",
-            "price": 55000
-        },
-        {
             "brand": "Ami Paris",
             "name": "Wool Jacket",
-            "price": 45000
+            "price": 45000,
+            "image": "wool-jacket.jpg"
+        },
+        {
+            "brand": "Lemaire",
+            "name": "Relaxed Shirt",
+            "price": 28000,
+            "image": "relaxed-shirt.jpg"
         }
     ]
 
@@ -113,472 +288,317 @@ def sale():
 
 
 # =========================
-# SHOES
+# READY-TO-WEAR PRODUCTS
 # =========================
 
-@app.route("/shoes")
-def shoes():
+products = {
 
-    products = [
+    "all-products": [
         {
-            "brand": "Nike",
-            "name": "Air Max Shoes",
-            "price": 12000
+            "brand": "Ami Paris",
+            "name": "Classic Wool Jacket",
+            "price": 45000,
+            "image": "wool-jacket.jpg"
         },
         {
-            "brand": "Adidas",
-            "name": "Running Shoes",
-            "price": 8500
+            "brand": "Balmain",
+            "name": "Elegant Black Dress",
+            "price": 65000
         },
         {
-            "brand": "Puma",
-            "name": "Classic Sneakers",
-            "price": 6500
+            "brand": "Lemaire",
+            "name": "Relaxed Shirt",
+            "price": 28000,
+            "image": "relaxed-shirt.jpg"
+        }
+    ],
+
+    "new-brands": [
+        {
+            "brand": "Ami Paris",
+            "name": "Wool Jacket",
+            "price": 45000,
+            "image": "wool-jacket.jpg"
+        },
+        {
+            "brand": "Lemaire",
+            "name": "Relaxed Shirt",
+            "price": 28000,
+            "image": "relaxed-shirt.jpg"
+        }
+    ],
+
+    "jackets": [
+        {
+            "brand": "Ami Paris",
+            "name": "Wool Jacket",
+            "price": 45000,
+            "image": "wool-jacket.jpg"
+        },
+        {
+            "brand": "Balmain",
+            "name": "Black Designer Jacket",
+            "price": 65000
+        }
+    ],
+
+    "dresses": [
+        {
+            "brand": "Dior",
+            "name": "Elegant Evening Dress",
+            "price": 95000
+        },
+        {
+            "brand": "Celine",
+            "name": "Classic Black Dress",
+            "price": 55000
+        }
+    ],
+
+    "pants": [
+        {
+            "brand": "The Row",
+            "name": "Wide Leg Pants",
+            "price": 45000
+        },
+        {
+            "brand": "Loewe",
+            "name": "Leather Pants",
+            "price": 55000
         }
     ]
+}
+
+
+@app.route("/ready-to-wear/<category>")
+def product_category(category):
+
+    category_products = products.get(category, [])
+
+    category_name = category.replace("-", " ").title()
 
     return render_template(
         "products.html",
-        category="Shoes",
-        products=products
+        category=category_name,
+        products=category_products
     )
 
 
 # =========================
-# BAGS
+# DESIGNER BRAND PRODUCTS
 # =========================
 
-@app.route("/bags")
-def bags():
+brand_products = {
 
-    products = [
+    "ami-paris": [
         {
-            "brand": "Classic",
-            "name": "Leather Handbag",
+            "brand": "Ami Paris",
+            "name": "Ami Paris Wool Jacket",
+            "price": 45000,
+            "image": "wool-jacket.jpg"
+        },
+        {
+            "brand": "Ami Paris",
+            "name": "Ami Paris T-Shirt",
+            "price": 18000
+        }
+    ],
+
+    "balmain": [
+        {
+            "brand": "Balmain",
+            "name": "Balmain Designer Jacket",
+            "price": 65000
+        },
+        {
+            "brand": "Balmain",
+            "name": "Balmain Black Dress",
+            "price": 75000
+        }
+    ],
+
+    "burberry": [
+        {
+            "brand": "Burberry",
+            "name": "Burberry Classic Coat",
+            "price": 85000
+        },
+        {
+            "brand": "Burberry",
+            "name": "Burberry Shirt",
+            "price": 35000
+        }
+    ],
+
+    "celine": [
+        {
+            "brand": "Celine",
+            "name": "Celine Classic Bag",
+            "price": 65000
+        },
+        {
+            "brand": "Celine",
+            "name": "Celine Designer Shoes",
+            "price": 55000
+        }
+    ],
+
+    "chloe": [
+        {
+            "brand": "Chloé",
+            "name": "Chloé Designer Dress",
+            "price": 70000
+        },
+        {
+            "brand": "Chloé",
+            "name": "Chloé Handbag",
+            "price": 60000
+        }
+    ],
+
+    "dior": [
+        {
+            "brand": "Dior",
+            "name": "Dior Classic Handbag",
+            "price": 95000
+        },
+        {
+            "brand": "Dior",
+            "name": "Dior Designer Dress",
+            "price": 85000
+        }
+    ],
+
+    "isabel-marant": [
+        {
+            "brand": "Isabel Marant",
+            "name": "Isabel Marant Jacket",
             "price": 55000
         },
         {
-            "brand": "Luxe",
-            "name": "Designer Bag",
-            "price": 42000
-        },
-        {
-            "brand": "Urban",
-            "name": "Shoulder Bag",
-            "price": 18000
+            "brand": "Isabel Marant",
+            "name": "Isabel Marant Dress",
+            "price": 48000
         }
-    ]
+    ],
 
-    return render_template(
-        "products.html",
-        category="Bags",
-        products=products
-    )
-
-
-# =========================
-# ACCESSORIES
-# =========================
-
-@app.route("/accessories")
-def accessories():
-
-    products = [
+    "khaite": [
         {
-            "brand": "Classic",
-            "name": "Leather Belt",
-            "price": 4500
-        },
-        {
-            "brand": "Luxury",
-            "name": "Designer Sunglasses",
-            "price": 8500
-        },
-        {
-            "brand": "Premium",
-            "name": "Wallet",
-            "price": 6500
-        }
-    ]
-
-    return render_template(
-        "products.html",
-        category="Accessories",
-        products=products
-    )
-
-
-# =========================
-# JEWELRY
-# =========================
-
-@app.route("/jewelry")
-def jewelry():
-
-    products = [
-        {
-            "brand": "Luxury",
-            "name": "Gold Necklace",
+            "brand": "Khaite",
+            "name": "Khaite Designer Dress",
             "price": 75000
         },
         {
-            "brand": "Classic",
-            "name": "Silver Bracelet",
-            "price": 15000
+            "brand": "Khaite",
+            "name": "Khaite Leather Bag",
+            "price": 85000
+        }
+    ],
+
+    "lemaire": [
+        {
+            "brand": "Lemaire",
+            "name": "Lemaire Wool Coat",
+            "price": 65000
         },
         {
-            "brand": "Premium",
-            "name": "Designer Ring",
-            "price": 25000
+            "brand": "Lemaire",
+            "name": "Relaxed Shirt",
+            "price": 28000,
+            "image": "relaxed-shirt.jpg"
+        }
+    ],
+
+    "loewe": [
+        {
+            "brand": "Loewe",
+            "name": "Loewe Leather Bag",
+            "price": 85000
+        },
+        {
+            "brand": "Loewe",
+            "name": "Loewe Designer Shoes",
+            "price": 55000
+        }
+    ],
+
+    "louis-vuitton": [
+        {
+            "brand": "Louis Vuitton",
+            "name": "Louis Vuitton Handbag",
+            "price": 120000
+        },
+        {
+            "brand": "Louis Vuitton",
+            "name": "Louis Vuitton Shoes",
+            "price": 75000
+        }
+    ],
+
+    "miu-miu": [
+        {
+            "brand": "Miu Miu",
+            "name": "Miu Miu Designer Dress",
+            "price": 65000
+        },
+        {
+            "brand": "Miu Miu",
+            "name": "Miu Miu Handbag",
+            "price": 75000
+        }
+    ],
+
+    "the-row": [
+        {
+            "brand": "The Row",
+            "name": "The Row Wool Coat",
+            "price": 90000
+        },
+        {
+            "brand": "The Row",
+            "name": "The Row Designer Pants",
+            "price": 55000
         }
     ]
-
-    return render_template(
-        "products.html",
-        category="Jewelry",
-        products=products
-    )
+}
 
 
 # =========================
-# BEAUTY
-# =========================
-
-@app.route("/beauty")
-def beauty():
-
-    products = [
-        {
-            "brand": "Beauty",
-            "name": "Premium Perfume",
-            "price": 8500
-        },
-        {
-            "brand": "Luxury",
-            "name": "Face Cream",
-            "price": 4500
-        },
-        {
-            "brand": "Premium",
-            "name": "Beauty Set",
-            "price": 6500
-        }
-    ]
-
-    return render_template(
-        "products.html",
-        category="Beauty",
-        products=products
-    )
-
-
-# =========================
-# READY TO WEAR CATEGORIES
-# =========================
-
-@app.route("/ready-to-wear/<category>")
-def ready_to_wear_category(category):
-
-    products = {
-
-        "all-products": [
-            {
-                "brand": "Balmain",
-                "name": "Designer Jacket",
-                "price": 65000
-            },
-            {
-                "brand": "Ami Paris",
-                "name": "Wool Jacket",
-                "price": 45000
-            },
-            {
-                "brand": "Burberry",
-                "name": "Classic Coat",
-                "price": 55000
-            }
-        ],
-
-        "new-brands": [
-            {
-                "brand": "Ami Paris",
-                "name": "Wool Jacket",
-                "price": 45000
-            },
-            {
-                "brand": "Lemaire",
-                "name": "Relaxed Shirt",
-                "price": 28000
-            }
-        ],
-
-        "jackets": [
-            {
-                "brand": "Balmain",
-                "name": "Designer Jacket",
-                "price": 65000
-            },
-            {
-                "brand": "Ami Paris",
-                "name": "Wool Jacket",
-                "price": 45000
-            }
-        ],
-
-        "knitwear": [
-            {
-                "brand": "Loewe",
-                "name": "Wool Knitwear",
-                "price": 38000
-            }
-        ],
-
-        "leather": [
-            {
-                "brand": "Celine",
-                "name": "Leather Jacket",
-                "price": 72000
-            }
-        ],
-
-        "tops-shirts": [
-            {
-                "brand": "Dior",
-                "name": "Designer Shirt",
-                "price": 32000
-            }
-        ],
-
-        "sets": [
-            {
-                "brand": "Miu Miu",
-                "name": "Designer Set",
-                "price": 48000
-            }
-        ],
-
-        "skirts": [
-            {
-                "brand": "Chloé",
-                "name": "Designer Skirt",
-                "price": 36000
-            }
-        ],
-
-        "coats": [
-            {
-                "brand": "Burberry",
-                "name": "Classic Coat",
-                "price": 55000
-            }
-        ],
-
-        "dresses": [
-            {
-                "brand": "The Row",
-                "name": "Luxury Dress",
-                "price": 60000
-            }
-        ],
-
-        "denim": [
-            {
-                "brand": "Isabel Marant",
-                "name": "Denim Jeans",
-                "price": 22000
-            }
-        ],
-
-        "pants": [
-            {
-                "brand": "Lemaire",
-                "name": "Designer Pants",
-                "price": 26000
-            }
-        ],
-
-        "suits": [
-            {
-                "brand": "Balmain",
-                "name": "Classic Suit",
-                "price": 75000
-            }
-        ],
-
-        "sweatshirts": [
-            {
-                "brand": "Ami Paris",
-                "name": "Logo Sweatshirt",
-                "price": 24000
-            }
-        ],
-
-        "shorts": [
-            {
-                "brand": "Louis Vuitton",
-                "name": "Designer Shorts",
-                "price": 30000
-            }
-        ],
-
-        "beachwear": [
-            {
-                "brand": "Khaite",
-                "name": "Premium Beachwear",
-                "price": 28000
-            }
-        ]
-    }
-
-    selected_products = products.get(category, [])
-
-    return render_template(
-        "products.html",
-        category=category.replace("-", " ").title(),
-        products=selected_products
-    )
-
-
-# =========================
-# BRANDS
+# BRAND PAGE
 # =========================
 
 @app.route("/brand/<brand>")
 def brand(brand):
 
-    brand_products = {
+    selected_products = brand_products.get(brand, [])
 
-        "Ami Paris": [
-            {
-                "brand": "Ami Paris",
-                "name": "Wool Jacket",
-                "price": 45000
-            },
-            {
-                "brand": "Ami Paris",
-                "name": "Logo Sweatshirt",
-                "price": 24000
-            }
-        ],
-
-        "Balmain": [
-            {
-                "brand": "Balmain",
-                "name": "Designer Jacket",
-                "price": 65000
-            },
-            {
-                "brand": "Balmain",
-                "name": "Classic Suit",
-                "price": 75000
-            }
-        ],
-
-        "Burberry": [
-            {
-                "brand": "Burberry",
-                "name": "Classic Coat",
-                "price": 55000
-            }
-        ],
-
-        "Celine": [
-            {
-                "brand": "Celine",
-                "name": "Leather Jacket",
-                "price": 72000
-            }
-        ],
-
-        "Chloé": [
-            {
-                "brand": "Chloé",
-                "name": "Designer Skirt",
-                "price": 36000
-            }
-        ],
-
-        "Dior": [
-            {
-                "brand": "Dior",
-                "name": "Designer Shirt",
-                "price": 32000
-            }
-        ],
-
-        "Isabel Marant": [
-            {
-                "brand": "Isabel Marant",
-                "name": "Denim Jeans",
-                "price": 22000
-            }
-        ],
-
-        "Khaite": [
-            {
-                "brand": "Khaite",
-                "name": "Premium Beachwear",
-                "price": 28000
-            }
-        ],
-
-        "Lemaire": [
-            {
-                "brand": "Lemaire",
-                "name": "Relaxed Shirt",
-                "price": 28000
-            },
-            {
-                "brand": "Lemaire",
-                "name": "Designer Pants",
-                "price": 26000
-            }
-        ],
-
-        "Loewe": [
-            {
-                "brand": "Loewe",
-                "name": "Wool Knitwear",
-                "price": 38000
-            }
-        ],
-
-        "Louis Vuitton": [
-            {
-                "brand": "Louis Vuitton",
-                "name": "Designer Shorts",
-                "price": 30000
-            }
-        ],
-
-        "Miu Miu": [
-            {
-                "brand": "Miu Miu",
-                "name": "Designer Set",
-                "price": 48000
-            }
-        ],
-
-        "The Row": [
-            {
-                "brand": "The Row",
-                "name": "Luxury Dress",
-                "price": 60000
-            }
-        ]
+    brand_names = {
+        "ami-paris": "Ami Paris",
+        "balmain": "Balmain",
+        "burberry": "Burberry",
+        "celine": "Celine",
+        "chloe": "Chloé",
+        "dior": "Dior",
+        "isabel-marant": "Isabel Marant",
+        "khaite": "Khaite",
+        "lemaire": "Lemaire",
+        "loewe": "Loewe",
+        "louis-vuitton": "Louis Vuitton",
+        "miu-miu": "Miu Miu",
+        "the-row": "The Row"
     }
 
-    selected_products = brand_products.get(brand, [])
+    brand_name = brand_names.get(brand, brand)
 
     return render_template(
         "products.html",
-        category=brand,
+        category=brand_name,
         products=selected_products
     )
 
 
 # =========================
-# ADD TO CART
+# CART
 # =========================
 
 @app.route("/add-to-cart", methods=["POST"])
@@ -587,7 +607,8 @@ def add_to_cart():
     product = {
         "brand": request.form.get("brand"),
         "name": request.form.get("name"),
-        "price": float(request.form.get("price", 0))
+        "price": int(request.form.get("price")),
+        "image": request.form.get("image")
     }
 
     cart = session.get("cart", [])
@@ -596,33 +617,22 @@ def add_to_cart():
 
     session["cart"] = cart
 
-    return redirect("/cart")
+    return redirect(url_for("cart"))
 
-
-# =========================
-# CART
-# =========================
 
 @app.route("/cart")
 def cart():
 
     cart_items = session.get("cart", [])
 
-    total = sum(
-        float(item.get("price", 0))
-        for item in cart_items
-    )
+    total = sum(item["price"] for item in cart_items)
 
     return render_template(
         "cart.html",
-        cart=cart_items,
+        cart_items=cart_items,
         total=total
     )
 
-
-# =========================
-# REMOVE FROM CART
-# =========================
 
 @app.route("/remove-from-cart/<int:index>")
 def remove_from_cart(index):
@@ -634,19 +644,15 @@ def remove_from_cart(index):
 
     session["cart"] = cart
 
-    return redirect("/cart")
+    return redirect(url_for("cart"))
 
-
-# =========================
-# CLEAR CART
-# =========================
 
 @app.route("/clear-cart")
 def clear_cart():
 
     session["cart"] = []
 
-    return redirect("/cart")
+    return redirect(url_for("cart"))
 
 
 # =========================
@@ -659,16 +665,13 @@ def checkout():
     cart_items = session.get("cart", [])
 
     if not cart_items:
-        return redirect("/cart")
+        return redirect(url_for("cart"))
 
-    total = sum(
-        float(item.get("price", 0))
-        for item in cart_items
-    )
+    total = sum(item["price"] for item in cart_items)
 
     return render_template(
         "checkout.html",
-        cart=cart_items,
+        cart_items=cart_items,
         total=total
     )
 
@@ -683,26 +686,38 @@ def place_order():
     cart_items = session.get("cart", [])
 
     if not cart_items:
-        return redirect("/cart")
+        return redirect(url_for("cart"))
 
-    total = sum(
-        float(item.get("price", 0))
-        for item in cart_items
-    )
+    customer = {
+        "name": request.form.get("name"),
+        "mobile": request.form.get("mobile"),
+        "address": request.form.get("address"),
+        "city": request.form.get("city"),
+        "state": request.form.get("state"),
+        "pincode": request.form.get("pincode"),
+        "items": cart_items,
+        "total": sum(item["price"] for item in cart_items)
+    }
 
-    conn = get_db()
+    conn = sqlite3.connect(DATABASE)
 
-    conn.execute(
-        """
-        INSERT INTO orders (items, total, status)
-        VALUES (?, ?, ?)
-        """,
-        (
-            json.dumps(cart_items),
-            total,
-            "Pending"
-        )
-    )
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        INSERT INTO orders
+        (name, mobile, address, city, state, pincode, items, total, status)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (
+        customer["name"],
+        customer["mobile"],
+        customer["address"],
+        customer["city"],
+        customer["state"],
+        customer["pincode"],
+        json.dumps(customer["items"]),
+        customer["total"],
+        "Pending"
+    ))
 
     conn.commit()
     conn.close()
@@ -711,13 +726,17 @@ def place_order():
 
     return render_template(
         "order-success.html",
-        total=total
+        order=customer
     )
 
 
 # =========================
 # ADMIN LOGIN
 # =========================
+
+ADMIN_USERNAME = "admin"
+ADMIN_PASSWORD = "Admin@123"
+
 
 @app.route("/admin-login", methods=["GET", "POST"])
 def admin_login():
@@ -727,49 +746,67 @@ def admin_login():
         username = request.form.get("username")
         password = request.form.get("password")
 
-        if username == "admin" and password == "Admin@123":
+        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
 
             session["admin_logged_in"] = True
 
-            return redirect("/orders")
+            return redirect(url_for("show_orders"))
 
-        return "Invalid username or password"
+        return render_template(
+            "admin-login.html",
+            error="Wrong username or password"
+        )
 
     return render_template("admin-login.html")
 
 
 # =========================
-# ORDERS
+# ADMIN ORDERS
 # =========================
 
 @app.route("/orders")
-def orders():
+def show_orders():
 
     if not session.get("admin_logged_in"):
-        return redirect("/admin-login")
+        return redirect(url_for("admin_login"))
 
-    conn = get_db()
+    conn = sqlite3.connect(DATABASE)
 
-    orders_data = conn.execute(
-        "SELECT * FROM orders ORDER BY id DESC"
-    ).fetchall()
+    conn.row_factory = sqlite3.Row
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT * FROM orders
+        ORDER BY id DESC
+    """)
+
+    database_orders = cursor.fetchall()
 
     conn.close()
 
-    orders_list = []
+    orders = []
 
-    for order in orders_data:
+    for row in database_orders:
 
-        orders_list.append({
-            "id": order["id"],
-            "items": json.loads(order["items"]),
-            "total": order["total"],
-            "status": order["status"]
-        })
+        order = {
+            "id": row["id"],
+            "name": row["name"],
+            "mobile": row["mobile"],
+            "address": row["address"],
+            "city": row["city"],
+            "state": row["state"],
+            "pincode": row["pincode"],
+            "items": json.loads(row["items"]),
+            "total": row["total"],
+            "status": row["status"] if "status" in row.keys() else "Pending"
+        }
+
+        orders.append(order)
 
     return render_template(
         "orders.html",
-        orders=orders_list
+        orders=orders
     )
 
 
@@ -781,7 +818,7 @@ def orders():
 def update_status(order_id):
 
     if not session.get("admin_logged_in"):
-        return redirect("/admin-login")
+        return redirect(url_for("admin_login"))
 
     status = request.form.get("status")
 
@@ -794,21 +831,44 @@ def update_status(order_id):
     if status not in allowed_statuses:
         status = "Pending"
 
-    conn = get_db()
+    conn = sqlite3.connect(DATABASE)
 
-    conn.execute(
-        """
+    cursor = conn.cursor()
+
+    cursor.execute("""
         UPDATE orders
         SET status = ?
         WHERE id = ?
-        """,
-        (status, order_id)
+    """, (status, order_id))
+
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for("show_orders"))
+
+# =========================
+# DELETE ORDER
+# =========================
+
+@app.route("/delete-order/<int:order_id>")
+def delete_order(order_id):
+
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("admin_login"))
+
+    conn = sqlite3.connect(DATABASE)
+
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "DELETE FROM orders WHERE id = ?",
+        (order_id,)
     )
 
     conn.commit()
     conn.close()
 
-    return redirect("/orders")
+    return redirect(url_for("show_orders"))
 
 
 # =========================
@@ -820,11 +880,11 @@ def admin_logout():
 
     session.pop("admin_logged_in", None)
 
-    return redirect("/admin-login")
+    return redirect(url_for("admin_login"))
 
 
 # =========================
-# RUN APP
+# START SERVER
 # =========================
 
 if __name__ == "__main__":

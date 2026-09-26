@@ -133,13 +133,11 @@
 
 </header>
 
-
 <div class="container">
 
     <h1>
         Customer Orders
     </h1>
-
 
     {% if orders %}
 
@@ -148,9 +146,20 @@
         <div class="order">
 
             <div class="order-title">
-                Order #{{ loop.index }}
-            </div>
+    Order #{{ loop.index }}
 
+    <a href="{{ url_for('delete_order', order_id=order.id) }}"
+       onclick="return confirm('Delete this order?');"
+       style="float:right;
+              background:red;
+              color:white;
+              padding:8px 15px;
+              text-decoration:none;
+              font-size:14px;
+              border-radius:4px;">
+        Remove
+    </a>
+</div>
 
             <!-- CUSTOMER DETAILS -->
 
@@ -188,7 +197,6 @@
 
             </div>
 
-
             <!-- PRODUCTS -->
 
             <h3>
@@ -215,45 +223,46 @@
 
             {% endfor %}
 
-<!-- ORDER STATUS -->
+            <!-- ORDER STATUS -->
 
-<div style="margin-top:20px;">
+            <div style="margin-top:20px;">
 
-    <span class="label">
-        Order Status:
-    </span>
+                <span class="label">
+                    Order Status:
+                </span>
 
-    <form method="POST"
-          action="{{ url_for('update_status', order_id=order.id) }}"
-          style="display:inline-block; margin-left:15px;">
+                <form method="POST"
+                      action="{{ url_for('update_status', order_id=order.id) }}"
+                      style="display:inline-block; margin-left:15px;">
 
-        <select name="status"
-                onchange="this.form.submit()"
-                style="padding:10px 15px;
-                       font-size:16px;
-                       border:1px solid #ccc;
-                       border-radius:5px;">
+                    <select name="status"
+                            onchange="this.form.submit()"
+                            style="padding:10px 15px;
+                                   font-size:16px;
+                                   border:1px solid #ccc;
+                                   border-radius:5px;">
 
-            <option value="Pending"
-                {% if order.status == "Pending" %}selected{% endif %}>
-                Pending
-            </option>
+                        <option value="Pending"
+                            {% if order.status == "Pending" %}selected{% endif %}>
+                            Pending
+                        </option>
 
-            <option value="Shipped"
-                {% if order.status == "Shipped" %}selected{% endif %}>
-                Shipped
-            </option>
+                        <option value="Shipped"
+                            {% if order.status == "Shipped" %}selected{% endif %}>
+                            Shipped
+                        </option>
 
-            <option value="Delivered"
-                {% if order.status == "Delivered" %}selected{% endif %}>
-                Delivered
-            </option>
+                        <option value="Delivered"
+                            {% if order.status == "Delivered" %}selected{% endif %}>
+                            Delivered
+                        </option>
 
-        </select>
+                    </select>
 
-    </form>
+                </form>
 
-</div>
+            </div>
+
             <div class="total">
 
                 Order Total:
@@ -264,7 +273,6 @@
         </div>
 
         {% endfor %}
-
 
     {% else %}
 
@@ -286,4 +294,4 @@
 
 </body>
 
-</html>
+</html> 

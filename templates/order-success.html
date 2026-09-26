@@ -2,16 +2,12 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Order Placed</title>
 
     <style>
-
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -33,18 +29,15 @@
         }
 
         .order-box {
-            text-align: left;
             margin-top: 30px;
             padding: 25px;
             background: #f7f7f7;
         }
 
-        .row {
-            margin-bottom: 12px;
-        }
-
-        .label {
+        .total {
+            font-size: 22px;
             font-weight: bold;
+            margin-top: 20px;
         }
 
         .button {
@@ -55,73 +48,32 @@
             color: white;
             text-decoration: none;
         }
-
     </style>
-
 </head>
 
 <body>
 
 <div class="container">
 
-    <h1>
-        ✅ Order Placed Successfully
-    </h1>
+    <h1>✅ Order Placed Successfully</h1>
 
-    <p>
-        Thank you for your order.
-    </p>
-
+    <p>Thank you for your order.</p>
 
     <div class="order-box">
 
-        <div class="row">
-            <span class="label">Customer:</span>
-            {{ order.name }}
-        </div>
+        <p>Your order has been successfully placed.</p>
 
-        <div class="row">
-            <span class="label">Mobile:</span>
-            {{ order.mobile }}
-        </div>
-
-        <div class="row">
-            <span class="label">Address:</span>
-            {{ order.address }}
-        </div>
-
-        <div class="row">
-            <span class="label">City:</span>
-            {{ order.city }}
-        </div>
-
-        <div class="row">
-            <span class="label">State:</span>
-            {{ order.state }}
-        </div>
-
-        <div class="row">
-            <span class="label">PIN Code:</span>
-            {{ order.pincode }}
-        </div>
-
-        <div class="row">
-            <span class="label">Total:</span>
-            ₹{{ "{:,}".format(order.total) }}
+        <div class="total">
+            Total: ₹{{ "{:,.2f}".format(order.total) }}
         </div>
 
     </div>
 
-
-    <a
-        class="button"
-        href="/"
-    >
+    <a class="button" href="/">
         Continue Shopping
     </a>
 
 </div>
 
 </body>
-
 </html>

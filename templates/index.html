@@ -53,29 +53,6 @@
             color: #d4af37;
         }
 
-        /* SEARCH */
-        .search-box {
-            background: white;
-            border-radius: 25px;
-            padding: 8px 14px;
-            display: flex;
-            align-items: center;
-        }
-
-        .search-box input {
-            border: none;
-            outline: none;
-            width: 190px;
-            font-size: 14px;
-        }
-
-        .search-box button {
-            border: none;
-            background: none;
-            cursor: pointer;
-            font-size: 17px;
-        }
-
         /* CATEGORIES */
         .categories {
             background: white;
@@ -123,108 +100,13 @@
         .hero p {
             font-size: 18px;
             color: #ddd;
-            margin-bottom: 25px;
-        }
-
-        .hero-btn {
-            display: inline-block;
-            background: white;
-            color: #111;
-            text-decoration: none;
-            padding: 13px 28px;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-
-        .hero-btn:hover {
-            background: #d4af37;
-            color: white;
-        }
-
-        /* PRODUCTS */
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 55px 20px;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 30px;
-            margin-bottom: 35px;
-        }
-
-        .section-title span {
-            display: block;
-            font-size: 13px;
-            color: #777;
-            font-weight: normal;
-            margin-top: 8px;
-        }
-
-        .products {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-
-        .product {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            text-align: center;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-            transition: 0.25s;
-        }
-
-        .product:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.14);
-        }
-
-        .product-image {
-            height: 220px;
-            background: #f1f1f1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 80px;
-        }
-
-        .product-info {
-            padding: 22px;
-        }
-
-        .product h3 {
-            margin: 0 0 10px;
-            font-size: 20px;
-        }
-
-        .price {
-            font-size: 21px;
-            font-weight: bold;
-            margin: 12px 0 18px;
-        }
-
-        .add-cart {
-            width: 100%;
-            background: #111;
-            color: white;
-            border: none;
-            padding: 13px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .add-cart:hover {
-            background: #b08d2f;
+            margin: 0;
         }
 
         /* INFO SECTION */
         .features {
             background: white;
-            padding: 40px 5%;
+            padding: 50px 5%;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
@@ -232,34 +114,92 @@
         }
 
         .feature {
-            padding: 20px;
+            padding: 25px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .feature-link {
+            display: block;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .feature:hover {
+            background: #f8f8f8;
+            transform: translateY(-4px);
+        }
+
+        .feature:focus-visible {
+            outline: 2px solid #b08d2f;
+            outline-offset: 4px;
         }
 
         .feature-icon {
-            font-size: 35px;
+            font-size: 40px;
         }
 
         .feature h3 {
-            margin: 10px 0;
+            margin: 12px 0;
         }
 
         .feature p {
             color: #666;
             font-size: 14px;
+            margin: 0;
         }
 
-        /* CART */
-        .cart {
+        /* FEATURE POPUP */
+        .feature-modal {
+            display: none;
             position: fixed;
-            right: 25px;
-            bottom: 25px;
-            background: #111;
-            color: white;
-            padding: 14px 22px;
-            border-radius: 30px;
-            font-weight: bold;
-            box-shadow: 0 4px 15px #999;
-            z-index: 1000;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(0, 0, 0, 0.55);
+            padding: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-modal.show {
+            display: flex;
+        }
+
+        .feature-modal-box {
+            position: relative;
+            width: min(100%, 450px);
+            background: white;
+            color: #222;
+            padding: 38px 32px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-icon {
+            font-size: 48px;
+        }
+
+        .feature-modal-box h2 {
+            margin: 15px 0 10px;
+        }
+
+        .feature-modal-box p {
+            margin: 0;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            border: none;
+            background: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #555;
         }
 
         /* FOOTER */
@@ -268,7 +208,6 @@
             color: white;
             text-align: center;
             padding: 28px;
-            margin-top: 0;
         }
 
         footer p {
@@ -278,13 +217,8 @@
 
         /* MOBILE */
         @media (max-width: 800px) {
-
             .topbar {
                 justify-content: center;
-            }
-
-            .products {
-                grid-template-columns: 1fr 1fr;
             }
 
             .features {
@@ -297,17 +231,8 @@
         }
 
         @media (max-width: 550px) {
-
-            .products {
-                grid-template-columns: 1fr;
-            }
-
             .categories {
                 gap: 15px;
-            }
-
-            .search-box input {
-                width: 140px;
             }
 
             .hero h1 {
@@ -319,7 +244,6 @@
 
 <body>
 
-    <!-- TOP NAVIGATION -->
     <header class="topbar">
 
         <div class="logo">
@@ -328,26 +252,14 @@
 
         <nav class="nav-links">
             <a href="/">Home</a>
-<a href="/ready-to-wear">New Arrivals</a>
-<a href="/sale">Sale</a>
+            <a href="/ready-to-wear">New Arrivals</a>
+            <a href="/sale">Sale</a>
             <a href="/admin-login">Login</a>
             <a href="/orders">Orders</a>
         </nav>
 
-        <div class="search-box">
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search products..."
-                onkeyup="searchProducts()"
-            >
-            <button>🔍</button>
-        </div>
-
     </header>
 
-
-    <!-- CATEGORIES -->
     <div class="categories">
 
         <a href="/designers">Designers</a>
@@ -360,8 +272,6 @@
 
     </div>
 
-
-    <!-- HERO -->
     <section class="hero">
 
         <div class="hero-content">
@@ -372,192 +282,114 @@
                 Explore premium fashion, accessories and lifestyle products.
             </p>
 
-            <a href="#featured" class="hero-btn">
-                Shop Now
-            </a>
-
         </div>
 
     </section>
 
-
-    <!-- PRODUCTS -->
-    <main class="container" id="featured">
-
-        <h2 class="section-title">
-            Featured Products
-            <span>Discover our popular products</span>
-        </h2>
-
-        <div class="products" id="productList">
-
-            <!-- PRODUCT 1 -->
-            <div class="product">
-
-                <div class="product-image">
-                    💻
-                </div>
-
-                <div class="product-info">
-
-                    <h3>Laptop</h3>
-
-                    <p class="price">
-                        ₹45,000
-                    </p>
-
-                    <button
-                        class="add-cart"
-                        onclick="addToCart('Laptop', 45000)"
-                    >
-                        Add to Cart
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- PRODUCT 2 -->
-            <div class="product">
-
-                <div class="product-image">
-                    📱
-                </div>
-
-                <div class="product-info">
-
-                    <h3>Mobile Phone</h3>
-
-                    <p class="price">
-                        ₹15,000
-                    </p>
-
-                    <button
-                        class="add-cart"
-                        onclick="addToCart('Mobile Phone', 15000)"
-                    >
-                        Add to Cart
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- PRODUCT 3 -->
-            <div class="product">
-
-                <div class="product-image">
-                    🎧
-                </div>
-
-                <div class="product-info">
-
-                    <h3>Headphones</h3>
-
-                    <p class="price">
-                        ₹1,500
-                    </p>
-
-                    <button
-                        class="add-cart"
-                        onclick="addToCart('Headphones', 1500)"
-                    >
-                        Add to Cart
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </main>
-
-
-    <!-- FEATURES -->
     <section class="features">
 
-        <div class="feature">
+        <a
+            class="feature feature-link"
+            href="#feature-info"
+            onclick="openFeature('🚚', 'Fast Delivery', 'Quick and reliable delivery for your order.'); return false;"
+        >
             <div class="feature-icon">🚚</div>
             <h3>Fast Delivery</h3>
             <p>Quick and reliable delivery.</p>
-        </div>
+        </a>
 
-        <div class="feature">
+        <a
+            class="feature feature-link"
+            href="#feature-info"
+            onclick="openFeature('🔒', 'Secure Shopping', 'Your payment and shopping experience are kept safe and secure.'); return false;"
+        >
             <div class="feature-icon">🔒</div>
             <h3>Secure Shopping</h3>
             <p>Your shopping experience matters to us.</p>
-        </div>
+        </a>
 
-        <div class="feature">
+        <a
+            class="feature feature-link"
+            href="#feature-info"
+            onclick="openFeature('⭐', 'Quality Products', 'We carefully select products for our customers.'); return false;"
+        >
             <div class="feature-icon">⭐</div>
             <h3>Quality Products</h3>
             <p>Products selected for our customers.</p>
-        </div>
+        </a>
 
     </section>
 
+    <div
+        class="feature-modal"
+        id="featureModal"
+        onclick="closeFeature(event)"
+    >
+        <div
+            class="feature-modal-box"
+            id="feature-info"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modalTitle"
+            onclick="event.stopPropagation()"
+        >
+            <button
+                class="modal-close"
+                type="button"
+                aria-label="Close"
+                onclick="closeFeature()"
+            >
+                ×
+            </button>
 
-    <!-- CART -->
-    <div class="cart">
-        🛒 Cart: <span id="cartCount">0</span>
+            <div class="modal-icon" id="modalIcon"></div>
+            <h2 id="modalTitle"></h2>
+            <p id="modalText"></p>
+        </div>
     </div>
 
-
-    <!-- FOOTER -->
     <footer>
-
         <p>© 2026 My E-Commerce Store</p>
-
     </footer>
 
-
-    <!-- JAVASCRIPT -->
     <script>
 
-        let cartCount = 0;
+        function openFeature(icon, title, text) {
 
-        function addToCart(productName, price) {
+            document.getElementById("modalIcon").innerText = icon;
+            document.getElementById("modalTitle").innerText = title;
+            document.getElementById("modalText").innerText = text;
 
-            cartCount++;
+            document
+                .getElementById("featureModal")
+                .classList
+                .add("show");
 
-            document.getElementById("cartCount").innerText = cartCount;
+            document.body.style.overflow = "hidden";
 
-            alert(productName + " added to cart!");
+        }
+
+        function closeFeature(event) {
+
+            let modal = document.getElementById("featureModal");
+
+            if (event && event.target !== modal) {
+                return;
+            }
+
+            modal.classList.remove("show");
+
+            document.body.style.overflow = "";
 
         }
 
+        document.addEventListener("keydown", function(event) {
 
-        function searchProducts() {
+            if (event.key === "Escape") {
+                closeFeature();
+            }
 
-            let search =
-                document
-                .getElementById("searchInput")
-                .value
-                .toLowerCase();
-
-            let products =
-                document.querySelectorAll(".product");
-
-            products.forEach(function(product) {
-
-                let name =
-                    product
-                    .querySelector("h3")
-                    .innerText
-                    .toLowerCase();
-
-                if (name.includes(search)) {
-                    product.style.display = "";
-                } else {
-                    product.style.display = "none";
-                }
-
-            });
-
-        }
+        });
 
     </script>
 

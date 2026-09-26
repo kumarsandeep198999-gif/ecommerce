@@ -2,11 +2,8 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Shopping Cart</title>
 
@@ -61,6 +58,20 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 20px;
+        }
+
+        .item-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .product-image {
+            width: 100px;
+            height: 100px;
+            background: #eee;
+            object-fit: cover;
         }
 
         .product-name {
@@ -86,6 +97,10 @@
             border-radius: 5px;
         }
 
+        .remove:hover {
+            background: #333;
+        }
+
         .total {
             background: white;
             padding: 25px;
@@ -99,6 +114,7 @@
             margin-top: 20px;
             display: flex;
             justify-content: space-between;
+            gap: 15px;
         }
 
         .button {
@@ -107,6 +123,10 @@
             padding: 12px 20px;
             text-decoration: none;
             border-radius: 5px;
+        }
+
+        .button:hover {
+            background: #333;
         }
 
         .empty {
@@ -124,11 +144,38 @@
             padding: 25px;
         }
 
+        @media (max-width: 600px) {
+
+            header {
+                padding: 15px 20px;
+            }
+
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .item-left {
+                width: 100%;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .button {
+                text-align: center;
+            }
+
+        }
+
     </style>
 
 </head>
 
+
 <body>
+
 
 <header>
 
@@ -145,9 +192,7 @@
 
 <div class="container">
 
-    <h1>
-        Shopping Cart
-    </h1>
+    <h1>Shopping Cart</h1>
 
 
     {% if cart_items %}
@@ -156,18 +201,38 @@
 
         <div class="cart-item">
 
-            <div>
+            <div class="item-left">
 
-                <div class="product-name">
-                    {{ item.name }}
-                </div>
 
-                <div class="brand">
-                    {{ item.brand }}
-                </div>
+                {% if item.image %}
 
-                <div class="price">
-                    ₹{{ "{:,}".format(item.price) }}
+                    <img
+                        class="product-image"
+                        src="{{ url_for('static', filename='images/' + item.image) }}"
+                        alt="{{ item.name }}"
+                    >
+
+                {% else %}
+
+                    <div class="product-image"></div>
+
+                {% endif %}
+
+
+                <div>
+
+                    <div class="product-name">
+                        {{ item.name }}
+                    </div>
+
+                    <div class="brand">
+                        {{ item.brand }}
+                    </div>
+
+                    <div class="price">
+                        ₹{{ "{:,}".format(item.price) }}
+                    </div>
+
                 </div>
 
             </div>
@@ -175,7 +240,7 @@
 
             <a
                 class="remove"
-                href="/remove-from-cart/{{ loop.index0 }}"
+                href="{{ url_for('remove_from_cart', index=loop.index0) }}"
             >
                 Remove
             </a>
@@ -196,11 +261,11 @@
         <div class="buttons">
 
             <a
-    class="button"
-    href="/checkout"
->
-    Checkout
-</a>
+                class="button"
+                href="/checkout"
+            >
+                Checkout
+            </a>
 
             <a
                 class="button"
@@ -214,11 +279,13 @@
 
     {% else %}
 
+
         <div class="empty">
 
             Your cart is empty.
 
-            <br><br>
+            <br>
+            <br>
 
             <a
                 class="button"
@@ -229,7 +296,9 @@
 
         </div>
 
+
     {% endif %}
+
 
 </div>
 
@@ -239,6 +308,7 @@
     © 2026 My E-Commerce Store
 
 </footer>
+
 
 </body>
 
